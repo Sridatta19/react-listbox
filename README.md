@@ -1,6 +1,10 @@
 # react-listbox
 a double listbox react component
 
+[![travis build](https://img.shields.io/travis/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/Sridatta19/react-listbox)
+[![VersionEye](https://img.shields.io/versioneye/d/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)]()
+[![license](https://img.shields.io/github/license/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)]()
+
 ### Installation
 
 This package can be installed via npm
