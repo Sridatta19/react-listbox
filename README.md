@@ -2,8 +2,9 @@
 a double listbox react component
 
 [![travis build](https://img.shields.io/travis/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/Sridatta19/react-listbox)
-[![VersionEye](https://img.shields.io/versioneye/d/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)]()
-[![license](https://img.shields.io/github/license/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)]()
+[![version](https://img.shields.io/npm/v/react-listbox.svg?style=flat-square)](http://npm.im/react-listbox)
+[![license](https://img.shields.io/github/license/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)](http://opensource.org/licenses/MIT)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 
 ### Installation
 
