@@ -1,0 +1,7 @@
+{
+  "presets":  ["latest", "react"],
+  "plugins": [
+    "transform-class-properties",
+    "transform-react-constant-elements"
+  ]
+}

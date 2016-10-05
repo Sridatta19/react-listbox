@@ -1,0 +1,40 @@
+{
+  "name": "react-listbox",
+  "version": "1.0.0",
+  "description": "a double listbox react component",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "rimraf dist",
+    "build": "babel --out-dir dist src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sridatta19/react-listbox.git"
+  },
+  "keywords": [
+    "react",
+    "listbox",
+    "multi-select"
+  ],
+  "author": "Sridatta <dattacrew19@gmail.com> (https://twitter.com/dattacrew19)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sridatta19/react-listbox/issues"
+  },
+  "homepage": "https://github.com/Sridatta19/react-listbox#readme",
+  "dependencies": {
+    "classnames": "2.2.5",
+    "ramda": "0.22.1",
+    "react": "15.3.2",
+    "react-dom": "15.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.16.0",
+    "babel-plugin-transform-class-properties": "6.16.0",
+    "babel-plugin-transform-react-constant-elements": "6.9.1",
+    "babel-preset-latest": "6.16.0",
+    "babel-preset-react": "6.16.0",
+    "rimraf": "2.5.4"
+  }
+}
