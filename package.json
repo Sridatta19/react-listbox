@@ -1,6 +1,6 @@
 {
   "name": "react-listbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a double listbox react component",
   "main": "dist/index.js",
   "scripts": {
