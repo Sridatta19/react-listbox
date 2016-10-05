@@ -1,10 +1,10 @@
 {
   "name": "react-listbox",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a double listbox react component",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register --recursive tests/**/*.spec.js --require tests/setup.js",
     "prebuild": "rimraf dist",
     "build": "babel --out-dir dist src"
   },
@@ -39,6 +39,11 @@
     "babel-plugin-transform-react-constant-elements": "6.9.1",
     "babel-preset-latest": "6.16.0",
     "babel-preset-react": "6.16.0",
+    "chai": "3.5.0",
+    "enzyme": "2.4.1",
+    "ignore-styles": "5.0.1",
+    "mocha": "3.1.0",
+    "nyc": "8.3.0",
     "rimraf": "2.5.4"
   }
 }
