@@ -1,8 +1,8 @@
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import R from 'ramda'
-import '../public/app.css';
-import '../public/ionicons.min.css';
+import '../public/app.css'
+import '../public/ionicons.min.css'
 import { SelectionPanel, SelectionPanel2 } from './selectionPanels'
 import { SelectableListItem, SelectedListItem } from './listItems'
 import {
@@ -38,7 +38,7 @@ class DoubleListBox extends Component {
 
   handleSelectedItem = (obj, stateLabel) => {
     const newState = {}
-    const value = R.keys(obj)[0];
+    const value = R.keys(obj)[0]
     if (obj[value]) {
       newState[stateLabel] = removeValueInCollection(+value, this.state[stateLabel])
     } else {
@@ -86,11 +86,11 @@ class DoubleListBox extends Component {
   }
 
   moveUp = () => {
-    this.moveVertically(true);
+    this.moveVertically(true)
   }
 
   moveDown = () => {
-    this.moveVertically(false);
+    this.moveVertically(false)
   }
 
   moveTop = () => {
@@ -158,8 +158,8 @@ class DoubleListBox extends Component {
               </ul>
           </div>
       </div>
-    );
+    )
   }
 }
 
-export default DoubleListBox;
+export default DoubleListBox

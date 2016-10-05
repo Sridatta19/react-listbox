@@ -1,0 +1,55 @@
+{
+  "extends": ["eslint-config-airbnb"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "babel"
+  ],
+  "rules": {
+    "constructor-super": 2,
+    "semi": [ 2, "never" ],
+    "comma-dangle": 0,
+    "eqeqeq": [2, "allow-null"],
+    "global-require": 0,
+    "id-length": 0,
+    "indent": [2, 2, { "SwitchCase": 1, "VariableDeclarator": 1 }],
+    "no-eq-null": 0,
+    "one-var": [2, { "initialized": "never" }],
+    "prefer-const": 0,
+    "radix": ["error", "as-needed"],
+    "no-param-reassign": 0,
+    "no-shadow": 0,
+    "no-this-before-super": 2,
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "babel/object-shorthand": 2,
+    "import/imports-first": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react/forbid-prop-types": 0,
+    "react/no-danger": 0,
+    "react/jsx-boolean-value": 2,
+    "react/jsx-no-duplicate-props": 2,
+    "react/jsx-filename-extension": 0,
+    "react/sort-comp": 0,
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": false
+    }],
+    "react/prop-types": [2, { "ignore": [
+        "children",
+        "className",
+        "style",
+        "bsStyle",
+        "bsClass",
+        "bsSize"
+        ]
+    }]
+  }
+}
