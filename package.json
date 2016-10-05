@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rimraf dist",
-    "build": "babel --out-dir dist src"
+    "build": "babel --out-dir dist src",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",

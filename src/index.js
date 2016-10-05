@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import R from 'ramda'
-import '../public/App.css';
+import '../public/app.css';
 import '../public/ionicons.min.css';
 import { SelectionPanel, SelectionPanel2 } from './selectionPanels'
 import { SelectableListItem, SelectedListItem } from './listItems'
