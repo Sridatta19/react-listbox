@@ -36,3 +36,7 @@ onChange = (selectedValues) => {
 ### Other
 
 This library was inspired by jQuery [multi-select](https://github.com/lou/multi-select/).
+
+### License
+
+MIT Licensed. Copyright (c) Sridatta 2016.
