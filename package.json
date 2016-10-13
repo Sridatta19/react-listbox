@@ -6,10 +6,10 @@
   "scripts": {
     "commit": "git-cz",
     "test": "mocha --compilers js:babel-core/register --recursive tests/**/*.spec.js --require tests/setup.js",
-    "prebuild": "rimraf build",
-    "build": "babel --copy-files --out-dir build src",
-    "build:umd": "rimraf dist && webpack --output-filename react-listbox.js",
-    "build:umd.min": "rimraf dist && webpack --output-filename react-listbox.min.js -p",
+    "prebuild": "rimraf build && rimraf dist",
+    "build": "npm-run-all --parallel build:*",
+    "build:main": "babel --copy-files --out-dir build src",
+    "build:umd": "webpack --output-filename react-listbox.min.js -p",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -23,7 +23,7 @@
     "multi-select"
   ],
   "files": [
-    "dist",
+    "build",
     "public"
   ],
   "author": "Sridatta <dattacrew19@gmail.com> (https://twitter.com/dattacrew19)",
@@ -68,6 +68,7 @@
     "ignore-styles": "5.0.1",
     "json-loader": "0.5.4",
     "mocha": "3.1.0",
+    "npm-run-all": "3.1.0",
     "nyc": "8.3.0",
     "postcss-loader": "0.13.0",
     "rimraf": "2.5.4",
