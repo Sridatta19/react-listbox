@@ -1,31 +1,50 @@
 
-import React from 'react';
+import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 
-export const SelectableListItem = ({ label, onSelect, value, isSelected }) => {
+export const SelectableListItem = (props) => {
   let listStyle = classNames({
-      'ms-elem-selectable': true,
-      selected: isSelected
-    })
+    'ms-elem-selectable': true,
+    selected: props.isSelected
+  })
+  return (
+    <ListItem listStyle={listStyle} {...props} />
+  )
+}
+
+SelectableListItem.propTypes = {
+  isSelected: PropTypes.bool
+}
+
+export const SelectedListItem = (props) => {
+  let listStyle = classNames({
+    'ms-elem-selection ms-selected': true,
+    selected: props.isSelected
+  })
+  return (
+    <ListItem listStyle={listStyle} {...props} />
+  )
+}
+
+SelectedListItem.propTypes = {
+  isSelected: PropTypes.bool
+}
+
+const ListItem = ({ label, onSelect, listStyle, value, isSelected }) => {
   const bindObject = {}
   bindObject[value] = isSelected
+  const onListClick = () => onSelect(bindObject)
   return (
-    <li className={listStyle} onClick={onSelect.bind(null, bindObject)}>
+    <li className={listStyle} onClick={onListClick}>
       <span>{label}</span>
     </li>
   )
 }
 
-export const SelectedListItem = ({ label, onSelect, value, isSelected }) => {
-  let listStyle = classNames({
-      'ms-elem-selection ms-selected': true,
-      selected: isSelected
-    })
-  const bindObject = {}
-  bindObject[value] = isSelected
-  return (
-    <li className={listStyle} onClick={onSelect.bind(null, bindObject)}>
-      <span>{label}</span>
-    </li>
-  )
+ListItem.propTypes = {
+  label: PropTypes.string,
+  isSelected: PropTypes.bool,
+  onSelect: PropTypes.func,
+  listStyle: PropTypes.string,
+  value: PropTypes.string
 }

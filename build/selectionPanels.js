@@ -18,7 +18,6 @@ var _ref3 = _react2.default.createElement('i', { className: 'icon ion-arrow-left
 var SelectionPanel = exports.SelectionPanel = function SelectionPanel(_ref) {
   var moveRight = _ref.moveRight;
   var moveLeft = _ref.moveLeft;
-
   return _react2.default.createElement(
     'div',
     { className: 'ms-selectionpanel' },
@@ -33,6 +32,11 @@ var SelectionPanel = exports.SelectionPanel = function SelectionPanel(_ref) {
       _ref3
     )
   );
+};
+
+SelectionPanel.propTypes = {
+  moveRight: _react.PropTypes.func,
+  moveLeft: _react.PropTypes.func
 };
 
 var _ref5 = _react2.default.createElement('i', { className: 'icon ion-ios-skipbackward rotate-90' });
@@ -60,7 +64,6 @@ var SelectionPanel2 = exports.SelectionPanel2 = function SelectionPanel2(_ref4) 
   var moveUp = _ref4.moveUp;
   var moveDown = _ref4.moveDown;
   var moveBottom = _ref4.moveBottom;
-
   return _react2.default.createElement(
     'div',
     { className: 'ms-selectionpanel2' },
@@ -87,4 +90,11 @@ var SelectionPanel2 = exports.SelectionPanel2 = function SelectionPanel2(_ref4) 
       _ref10
     )
   );
+};
+
+SelectionPanel2.propTypes = {
+  moveTop: _react.PropTypes.func,
+  moveDown: _react.PropTypes.func,
+  moveBottom: _react.PropTypes.func,
+  moveUp: _react.PropTypes.func
 };

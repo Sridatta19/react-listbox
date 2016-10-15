@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import R from 'ramda'
 import '../public/app.css'
 import '../public/ionicons.min.css'
@@ -20,6 +20,11 @@ class DoubleListBox extends Component {
     rightOptions: [],
     leftSearchTerm: '',
     rightSearchTerm: ''
+  }
+
+  static propTypes = {
+    options: PropTypes.array,
+    onChange: PropTypes.func
   }
 
   onLeftSelect = (obj) => {
@@ -70,7 +75,7 @@ class DoubleListBox extends Component {
     let selectedValues = retrieveValues(rightOptions)
     let newRightOptions = R.clone(rightOptions)
     R.forEach(
-      value => {
+      (value) => {
         let index = R.findIndex(R.propEq('value', value), newRightOptions)
         if (isDirectionUpward) {
           // eslint-disable-next-line
@@ -121,42 +126,43 @@ class DoubleListBox extends Component {
     const { leftOptions, rightOptions, leftSearchTerm, rightSearchTerm } = this.state
     return (
       <div className="ms-container" id="ms-pre-selected-options">
-          <div className="ms-selectable">
-              <input type="text" className="search-input" onChange={this.leftChange} autoComplete="off" placeholder="Search" />
-              <ul className="ms-list" tabIndex="-1">
-                  {leftOptions
-                    .filter(lo => lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1)
-                    .map(
-                      o => <SelectableListItem
-                        key={o.value}
-                        value={o.value}
-                        label={o.label}
-                        onSelect={this.onLeftSelect}
-                        isSelected={o.isSelected}
-                      />
-                  )}
-              </ul>
-          </div>
-          <SelectionPanel moveRight={this.moveRight} moveLeft={this.moveLeft} />
-          <SelectionPanel2
-            moveTop={this.moveTop} moveBottom={this.moveBottom}
-            moveUp={this.moveUp} moveDown={this.moveDown} />
-          <div className="ms-selection">
-              <input type="text" className="search-input" onChange={this.rightChange} autoComplete="off" placeholder="Search" />
-              <ul className="ms-list" tabIndex="-1">
-                {rightOptions
-                  .filter(ro => ro.label.toLowerCase().indexOf(rightSearchTerm.toLowerCase()) !== -1)
-                  .map(
-                    o => <SelectedListItem
-                      key={o.value}
-                      value={o.value}
-                      label={o.label}
-                      onSelect={this.onRightSelect}
-                      isSelected={o.isSelected}
-                    />
-                )}
-              </ul>
-          </div>
+        <div className="ms-selectable">
+          <input type="text" className="search-input" onChange={this.leftChange} autoComplete="off" placeholder="Search" />
+          <ul className="ms-list" tabIndex="-1">
+            {leftOptions
+              .filter(lo => lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1)
+              .map(
+                o => <SelectableListItem
+                  key={o.value}
+                  value={o.value}
+                  label={o.label}
+                  onSelect={this.onLeftSelect}
+                  isSelected={o.isSelected}
+                />
+              )}
+          </ul>
+        </div>
+        <SelectionPanel moveRight={this.moveRight} moveLeft={this.moveLeft} />
+        <SelectionPanel2
+          moveTop={this.moveTop} moveBottom={this.moveBottom}
+          moveUp={this.moveUp} moveDown={this.moveDown}
+        />
+        <div className="ms-selection">
+          <input type="text" className="search-input" onChange={this.rightChange} autoComplete="off" placeholder="Search" />
+          <ul className="ms-list" tabIndex="-1">
+            {rightOptions
+              .filter(ro => ro.label.toLowerCase().indexOf(rightSearchTerm.toLowerCase()) !== -1)
+              .map(
+                o => <SelectedListItem
+                  key={o.value}
+                  value={o.value}
+                  label={o.label}
+                  onSelect={this.onRightSelect}
+                  isSelected={o.isSelected}
+                />
+            )}
+          </ul>
+        </div>
       </div>
     )
   }

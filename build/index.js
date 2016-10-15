@@ -148,7 +148,8 @@ var DoubleListBox = function (_Component) {
         _react2.default.createElement(_selectionPanels.SelectionPanel, { moveRight: this.moveRight, moveLeft: this.moveLeft }),
         _react2.default.createElement(_selectionPanels.SelectionPanel2, {
           moveTop: this.moveTop, moveBottom: this.moveBottom,
-          moveUp: this.moveUp, moveDown: this.moveDown }),
+          moveUp: this.moveUp, moveDown: this.moveDown
+        }),
         _react2.default.createElement(
           'div',
           { className: 'ms-selection' },
@@ -176,4 +177,8 @@ var DoubleListBox = function (_Component) {
   return DoubleListBox;
 }(_react.Component);
 
+DoubleListBox.propTypes = {
+  options: _react.PropTypes.array,
+  onChange: _react.PropTypes.func
+};
 exports.default = DoubleListBox;
