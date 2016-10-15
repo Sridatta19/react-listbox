@@ -9,7 +9,7 @@ export default {
   output: {
     path: join(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'react-listbox',
+    library: 'DoubleListBox',
   },
   plugins: [
       new ExtractTextPlugin("react-listbox.css")
