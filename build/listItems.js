@@ -15,6 +15,8 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _utils = require('./utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SelectableListItem = exports.SelectableListItem = function SelectableListItem(props) {
@@ -69,5 +71,5 @@ ListItem.propTypes = {
   isSelected: _react.PropTypes.bool,
   onSelect: _react.PropTypes.func,
   listStyle: _react.PropTypes.string,
-  value: _react.PropTypes.string
+  value: _utils.alphaNumericProp
 };

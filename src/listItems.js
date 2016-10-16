@@ -1,6 +1,7 @@
 
 import React, { PropTypes } from 'react'
 import classNames from 'classnames'
+import { alphaNumericProp } from './utils'
 
 export const SelectableListItem = (props) => {
   let listStyle = classNames({
@@ -46,5 +47,5 @@ ListItem.propTypes = {
   isSelected: PropTypes.bool,
   onSelect: PropTypes.func,
   listStyle: PropTypes.string,
-  value: PropTypes.string
+  value: alphaNumericProp
 }

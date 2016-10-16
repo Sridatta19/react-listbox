@@ -34,3 +34,18 @@ export const retrieveValues = collection => R.map(
   R.prop('value'),
   R.filter(R.propEq('isSelected', true), collection)
 )
+
+export const alphaNumericProp = (props, propName, componentName) => {
+  componentName = componentName || 'ANONYMOUS'
+
+  if (props[propName]) {
+    let value = props[propName]
+    let currentType = typeof value
+    if (typeof value !== 'number' && typeof value !== 'string') {
+      return new Error(`Invalid prop '${propName}' of type '${currentType}'
+        supplied to '${componentName}', expected 'alphaNumeric'`)
+    }
+  }
+
+  return null
+}

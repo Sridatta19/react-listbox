@@ -3,7 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.retrieveValues = exports.swap = exports.filterAndTransformSelected = exports.removeValueInCollection = exports.updateValueInCollection = undefined;
+exports.alphaNumericProp = exports.retrieveValues = exports.swap = exports.filterAndTransformSelected = exports.removeValueInCollection = exports.updateValueInCollection = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _ramda = require('ramda');
 
@@ -37,4 +39,18 @@ var swap = exports.swap = function swap(x, y) {
 
 var retrieveValues = exports.retrieveValues = function retrieveValues(collection) {
   return _ramda2.default.map(_ramda2.default.prop('value'), _ramda2.default.filter(_ramda2.default.propEq('isSelected', true), collection));
+};
+
+var alphaNumericProp = exports.alphaNumericProp = function alphaNumericProp(props, propName, componentName) {
+  componentName = componentName || 'ANONYMOUS';
+
+  if (props[propName]) {
+    var value = props[propName];
+    var currentType = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+    if (typeof value !== 'number' && typeof value !== 'string') {
+      return new Error('Invalid prop \'' + propName + '\' of type \'' + currentType + '\'\n        supplied to \'' + componentName + '\', expected \'alphaNumeric\'');
+    }
+  }
+
+  return null;
 };

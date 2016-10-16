@@ -182,3 +182,4 @@ DoubleListBox.propTypes = {
   onChange: _react.PropTypes.func
 };
 exports.default = DoubleListBox;
+module.exports = exports['default'];

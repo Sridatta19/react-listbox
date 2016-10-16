@@ -1,5 +1,5 @@
 
-import {join} from 'path'
+import { join } from 'path'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const include = join(__dirname, 'src')
@@ -12,7 +12,7 @@ export default {
     library: 'DoubleListBox',
   },
   plugins: [
-      new ExtractTextPlugin("react-listbox.css")
+    new ExtractTextPlugin('react-listbox.css')
   ],
   devtool: 'eval',
   module: {
@@ -25,13 +25,17 @@ export default {
           babelrc: false,
           presets: ['react', 'latest'],
           plugins: [
-            "transform-class-properties",
-            "transform-react-constant-elements"
+            'transform-class-properties',
+            'transform-react-constant-elements',
+            'add-module-exports',
+            'transform-react-remove-prop-types'
           ]
         },
         include
       },
-      {test: /\.json$/, 'loader': 'json', include},
+      {
+        test: /\.json$/, loader: 'json', include
+      },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
@@ -55,7 +59,7 @@ export default {
       }
     },
     {
-      'react': {
+      react: {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
