@@ -1,8 +1,6 @@
 
 import React, { Component, PropTypes } from 'react'
 import R from 'ramda'
-import '../public/app.css'
-import '../public/ionicons.min.css'
 import { SelectionPanel, SelectionPanel2 } from './selectionPanels'
 import { SelectableListItem, SelectedListItem } from './listItems'
 import {
@@ -16,14 +14,23 @@ import {
 class DoubleListBox extends Component {
 
   state = {
-    leftOptions: this.props.options,
-    rightOptions: [],
+    leftOptions: this.props.options.filter(
+      option => !R.contains(option.value, this.props.selected)
+    ),
+    rightOptions: this.props.options.filter(
+      option => R.contains(option.value, this.props.selected)
+    ),
     leftSearchTerm: '',
     rightSearchTerm: ''
   }
 
+  static defaultProps = {
+    selected: []
+  }
+
   static propTypes = {
     options: PropTypes.array,
+    selected: PropTypes.array,
     onChange: PropTypes.func
   }
 

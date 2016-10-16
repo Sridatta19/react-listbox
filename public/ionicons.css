@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/*!
+  Ionicons, v2.0.0
+  Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
+  https://twitter.com/benjsperry  https://twitter.com/ionicframework
+  MIT License: https://github.com/driftyco/ionicons
+
+  Android-style icons originally built by Google’s
+  Material Design Icons: https://github.com/google/material-design-icons
+  used under CC BY http://creativecommons.org/licenses/by/4.0/
+  Modified icons to fit ionicon’s grid from original.
+*/
+@font-face { font-family: "Ionicons"; src: url("./fonts/ionicons.woff?v=2.0.0") format("woff"); font-weight: normal; font-style: normal; }
+.ion, .ionicons, .ion-arrow-down-b:before, .ion-arrow-left-a:before, .ion-arrow-right-a:before, .ion-arrow-up-b:before, .ion-ios-skipbackward:before, .ion-ios-skipforward:before { display: inline-block; font-family: "Ionicons"; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; text-rendering: auto; line-height: 1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.ion-arrow-down-b:before { content: "\f104"; }
+
+.ion-arrow-left-a:before { content: "\f106"; }
+
+.ion-arrow-right-a:before { content: "\f109"; }
+
+.ion-arrow-up-b:before { content: "\f10d"; }
+
+.ion-ios-skipbackward:before { content: "\f4ab"; }
+
+.ion-ios-skipforward:before { content: "\f4ad"; }

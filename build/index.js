@@ -14,10 +14,6 @@ var _ramda = require('ramda');
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-require('../public/app.css');
-
-require('../public/ionicons.min.css');
-
 var _selectionPanels = require('./selectionPanels');
 
 var _listItems = require('./listItems');
@@ -47,8 +43,12 @@ var DoubleListBox = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DoubleListBox.__proto__ || Object.getPrototypeOf(DoubleListBox)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      leftOptions: _this.props.options,
-      rightOptions: [],
+      leftOptions: _this.props.options.filter(function (option) {
+        return !_ramda2.default.contains(option.value, _this.props.selected);
+      }),
+      rightOptions: _this.props.options.filter(function (option) {
+        return _ramda2.default.contains(option.value, _this.props.selected);
+      }),
       leftSearchTerm: '',
       rightSearchTerm: ''
     }, _this.onLeftSelect = function (obj) {
@@ -177,8 +177,12 @@ var DoubleListBox = function (_Component) {
   return DoubleListBox;
 }(_react.Component);
 
+DoubleListBox.defaultProps = {
+  selected: []
+};
 DoubleListBox.propTypes = {
   options: _react.PropTypes.array,
+  selected: _react.PropTypes.array,
   onChange: _react.PropTypes.func
 };
 exports.default = DoubleListBox;

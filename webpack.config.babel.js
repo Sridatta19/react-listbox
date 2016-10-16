@@ -44,7 +44,7 @@ export default {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
         loader: 'file',
         query: {
-          name: 'static/[name].[ext]'
+          name: 'fonts/[name].[ext]'
         }
       }
     ]
