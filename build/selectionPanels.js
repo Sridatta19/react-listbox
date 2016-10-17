@@ -23,12 +23,12 @@ var SelectionPanel = exports.SelectionPanel = function SelectionPanel(_ref) {
     { className: 'ms-selectionpanel' },
     _react2.default.createElement(
       'button',
-      { onClick: moveRight, style: { margin: '120px 0' } },
+      { onClick: moveRight, style: { margin: '120px 6px' } },
       _ref2
     ),
     _react2.default.createElement(
       'button',
-      { onClick: moveLeft },
+      { onClick: moveLeft, style: { marginLeft: '6px' } },
       _ref3
     )
   );
@@ -41,23 +41,11 @@ SelectionPanel.propTypes = {
 
 var _ref5 = _react2.default.createElement('i', { className: 'icon ion-ios-skipbackward rotate-90' });
 
-var _ref6 = _react2.default.createElement(
-  'span',
-  null,
-  'Up'
-);
+var _ref6 = _react2.default.createElement('i', { className: 'icon ion-arrow-up-b' });
 
-var _ref7 = _react2.default.createElement('i', { className: 'icon ion-arrow-up-b' });
+var _ref7 = _react2.default.createElement('i', { className: 'icon ion-arrow-down-b' });
 
-var _ref8 = _react2.default.createElement('i', { className: 'icon ion-arrow-down-b' });
-
-var _ref9 = _react2.default.createElement(
-  'span',
-  null,
-  'Down'
-);
-
-var _ref10 = _react2.default.createElement('i', { className: 'icon ion-ios-skipforward rotate-90' });
+var _ref8 = _react2.default.createElement('i', { className: 'icon ion-ios-skipforward rotate-90' });
 
 var SelectionPanel2 = exports.SelectionPanel2 = function SelectionPanel2(_ref4) {
   var moveTop = _ref4.moveTop;
@@ -69,25 +57,33 @@ var SelectionPanel2 = exports.SelectionPanel2 = function SelectionPanel2(_ref4) 
     { className: 'ms-selectionpanel2' },
     _react2.default.createElement(
       'button',
-      { onClick: moveTop, style: { margin: '65px 0' } },
+      { onClick: moveTop, style: { margin: '65px 6px' } },
       _ref5
     ),
-    _ref6,
+    _react2.default.createElement(
+      'span',
+      { style: { marginLeft: '6px' } },
+      'Up'
+    ),
     _react2.default.createElement(
       'button',
-      { style: { marginBottom: '5px' }, onClick: moveUp },
+      { style: { margin: '6px' }, onClick: moveUp },
+      _ref6
+    ),
+    _react2.default.createElement(
+      'button',
+      { style: { margin: '6px' }, onClick: moveDown },
       _ref7
     ),
     _react2.default.createElement(
-      'button',
-      { onClick: moveDown },
-      _ref8
+      'span',
+      { style: { marginLeft: '6px' } },
+      'Down'
     ),
-    _ref9,
     _react2.default.createElement(
       'button',
-      { onClick: moveBottom, style: { margin: '55px 0' } },
-      _ref10
+      { onClick: moveBottom, style: { margin: '55px 6px' } },
+      _ref8
     )
   );
 };

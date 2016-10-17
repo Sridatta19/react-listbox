@@ -298,3 +298,44 @@ footer > div {
         font-size:1.5em;
     }
 }
+
+div#demo {
+  min-height: 374px;
+}
+
+.container{
+  padding: 20px;
+}
+.container h2{
+  padding-bottom: .3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  float: left;
+}
+.container a{
+  margin-right: 5px;
+}
+.container img{
+  border-radius: 3px;
+}
+.container code{
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  margin: 0;
+  font-size: 14px;
+  background-color: #e8e7e7;
+  border-radius: 3px;
+}
+.container .install p{
+  position: absolute;
+  margin-top: 65px;
+}
+.container .listbox{
+  padding: 20px;
+  position: absolute;
+  margin-top: 120px;
+}
