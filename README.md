@@ -40,7 +40,7 @@ onChange = (selectedValues) => {
 <ListBox options={options} onChange={onChange} selected={selected}/>
 ```
 
-You can also use the browser build available in the dist folder. You just need to include the ionicons.woff also in the appropriate destination
+You can also use the browser build available in the dist folder.
 
 ```html
 <script type="text/javascript" src="https://unpkg.com/react-listbox@1.2.1/dist/react-listbox.min.js"></script>

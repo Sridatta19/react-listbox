@@ -6,16 +6,22 @@ import { SelectableListItem, SelectedListItem } from './listItems'
 import {
   updateValueInCollection,
   removeValueInCollection,
-  filterAndTransformSelected,
-  swap,
-  retrieveValues
+  retrieveValues,
+  moveLeftToRight,
+  moveRightToLeft,
+  moveVertically
 } from './utils'
 
 class DoubleListBox extends Component {
 
   state = {
-    leftOptions: this.props.options.filter(
-      option => !R.contains(option.value, this.props.selected)
+    leftOptions: this.props.options.map(
+      option => {
+        if (R.contains(option.value, this.props.selected)) {
+          return R.set(R.lensProp('hidden'), true, option)
+        }
+        return option
+      }
     ),
     rightOptions: this.props.options.filter(
       option => R.contains(option.value, this.props.selected)
@@ -71,41 +77,18 @@ class DoubleListBox extends Component {
     this.setState(newState)
   }
 
-  moveLaterally = (fromLabel, toLabel) => {
-    const newState = {}
-    newState[fromLabel] = R.filter(R.propEq('isSelected', undefined), this.state[fromLabel])
-    newState[toLabel] = R.concat(
-      filterAndTransformSelected(this.state[fromLabel]),
-      this.state[toLabel]
-    )
+  moveRight = () => {
+    const newState = moveLeftToRight(this.state)
     this.setState(newState)
   }
 
-  moveRight = () => {
-    this.moveLaterally('leftOptions', 'rightOptions')
-  }
-
   moveLeft = () => {
-    this.moveLaterally('rightOptions', 'leftOptions')
+    const newState = moveRightToLeft(this.state)
+    this.setState(newState)
   }
 
   moveVertically = (isDirectionUpward) => {
-    const { rightOptions } = this.state
-    let selectedValues = retrieveValues(rightOptions)
-    let newRightOptions = R.clone(rightOptions)
-    R.forEach(
-      (value) => {
-        let index = R.findIndex(R.propEq('value', value), newRightOptions)
-        if (isDirectionUpward) {
-          // eslint-disable-next-line
-          index == 0 ? null : swap(index, index - 1)(newRightOptions)
-        } else {
-          // eslint-disable-next-line
-          ++index === rightOptions.length ? null : swap(index, index - 1)(newRightOptions)
-        }
-      },
-      selectedValues
-    )
+    const newRightOptions = moveVertically(isDirectionUpward, this.state)
     this.setState({ rightOptions: newRightOptions })
   }
 
@@ -141,14 +124,19 @@ class DoubleListBox extends Component {
     this.setState({ rightSearchTerm: event.target.value })
   }
 
+  onKeyDown = () => {
+    console.log("KEYDOWN")
+  }
+
   render() {
     const { leftOptions, rightOptions, leftSearchTerm, rightSearchTerm } = this.state
     return (
       <div className="ms-container" id="ms-pre-selected-options">
         <div className="ms-selectable">
           <input type="text" className="search-input" onChange={this.leftChange} autoComplete="off" placeholder="Search" />
-          <ul className="ms-list" tabIndex="-1">
+          <ul className="ms-list" tabIndex="-1" onKeyDown={this.onKeyDown}>
             {leftOptions
+              .filter(lo => !lo.hidden === true)
               .filter(lo => lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1)
               .map(
                 o => <SelectableListItem

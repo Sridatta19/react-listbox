@@ -43,8 +43,11 @@ var DoubleListBox = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DoubleListBox.__proto__ || Object.getPrototypeOf(DoubleListBox)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      leftOptions: _this.props.options.filter(function (option) {
-        return !_ramda2.default.contains(option.value, _this.props.selected);
+      leftOptions: _this.props.options.map(function (option) {
+        if (_ramda2.default.contains(option.value, _this.props.selected)) {
+          return _ramda2.default.set(_ramda2.default.lensProp('hidden'), true, option);
+        }
+        return option;
       }),
       rightOptions: _this.props.options.filter(function (option) {
         return _ramda2.default.contains(option.value, _this.props.selected);
@@ -69,30 +72,14 @@ var DoubleListBox = function (_Component) {
         newState[stateLabel] = (0, _utils.updateValueInCollection)(+value, _this.state[stateLabel]);
       }
       _this.setState(newState);
-    }, _this.moveLaterally = function (fromLabel, toLabel) {
-      var newState = {};
-      newState[fromLabel] = _ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state[fromLabel]);
-      newState[toLabel] = _ramda2.default.concat((0, _utils.filterAndTransformSelected)(_this.state[fromLabel]), _this.state[toLabel]);
-      _this.setState(newState);
     }, _this.moveRight = function () {
-      _this.moveLaterally('leftOptions', 'rightOptions');
+      var newState = (0, _utils.moveLeftToRight)(_this.state);
+      _this.setState(newState);
     }, _this.moveLeft = function () {
-      _this.moveLaterally('rightOptions', 'leftOptions');
+      var newState = (0, _utils.moveRightToLeft)(_this.state);
+      _this.setState(newState);
     }, _this.moveVertically = function (isDirectionUpward) {
-      var rightOptions = _this.state.rightOptions;
-
-      var selectedValues = (0, _utils.retrieveValues)(rightOptions);
-      var newRightOptions = _ramda2.default.clone(rightOptions);
-      _ramda2.default.forEach(function (value) {
-        var index = _ramda2.default.findIndex(_ramda2.default.propEq('value', value), newRightOptions);
-        if (isDirectionUpward) {
-          // eslint-disable-next-line
-          index == 0 ? null : (0, _utils.swap)(index, index - 1)(newRightOptions);
-        } else {
-          // eslint-disable-next-line
-          ++index === rightOptions.length ? null : (0, _utils.swap)(index, index - 1)(newRightOptions);
-        }
-      }, selectedValues);
+      var newRightOptions = (0, _utils.moveVertically)(isDirectionUpward, _this.state);
       _this.setState({ rightOptions: newRightOptions });
     }, _this.moveUp = function () {
       _this.moveVertically(true);
@@ -108,6 +95,8 @@ var DoubleListBox = function (_Component) {
       _this.setState({ leftSearchTerm: event.target.value });
     }, _this.rightChange = function (event) {
       _this.setState({ rightSearchTerm: event.target.value });
+    }, _this.onKeyDown = function () {
+      console.log("KEYDOWN");
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -146,8 +135,10 @@ var DoubleListBox = function (_Component) {
           _react2.default.createElement('input', { type: 'text', className: 'search-input', onChange: this.leftChange, autoComplete: 'off', placeholder: 'Search' }),
           _react2.default.createElement(
             'ul',
-            { className: 'ms-list', tabIndex: '-1' },
+            { className: 'ms-list', tabIndex: '-1', onKeyDown: this.onKeyDown },
             leftOptions.filter(function (lo) {
+              return !lo.hidden === true;
+            }).filter(function (lo) {
               return lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1;
             }).map(function (o) {
               return _react2.default.createElement(_listItems.SelectableListItem, {

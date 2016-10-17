@@ -18,9 +18,16 @@ export const removeValueInCollection = (value, collection) => (
   updateCollection(value, collection, undefined)
 )
 
-export const filterAndTransformSelected = R.compose(
+const isSelected = R.propEq('isSelected', true)
+
+const filterAndTransformSelected = R.compose(
     R.map(R.omit('isSelected')),
-    R.filter(R.propEq('isSelected', true))
+    R.filter(isSelected)
+)
+
+const filterAndRetrieveSelectedValues = R.compose(
+    R.map(R.prop('value')),
+    R.filter(isSelected)
 )
 
 export const swap = (x, y) => (collection) => {
@@ -32,7 +39,7 @@ export const swap = (x, y) => (collection) => {
 
 export const retrieveValues = collection => R.map(
   R.prop('value'),
-  R.filter(R.propEq('isSelected', true), collection)
+  R.filter(isSelected, collection)
 )
 
 export const alphaNumericProp = (props, propName, componentName) => {
@@ -48,4 +55,61 @@ export const alphaNumericProp = (props, propName, componentName) => {
   }
 
   return null
+}
+
+const addHideAndDropSelected = R.compose(
+  R.set(R.lensProp('hidden'), true),
+  R.omit('isSelected')
+)
+
+export const moveLeftToRight = (state) => {
+  const newState = {}
+  newState.leftOptions = state.leftOptions.map(
+    option => {
+      if (isSelected(option)) {
+        return addHideAndDropSelected(option)
+      }
+      return option
+    }
+  )
+  newState.rightOptions = R.concat(
+    state.rightOptions,
+    filterAndTransformSelected(state.leftOptions)
+  )
+  return newState
+}
+
+export const moveRightToLeft = (state) => {
+  const newState = {}
+  newState.rightOptions = R.filter(R.propEq('isSelected', undefined), state.rightOptions)
+  const selectedRightValues = filterAndRetrieveSelectedValues(state.rightOptions)
+  newState.leftOptions = state.leftOptions.map(
+    option => {
+      if (R.contains(option.value, selectedRightValues)) {
+        return R.omit('hidden', option)
+      }
+      return option
+    }
+  )
+  return newState
+}
+
+export const moveVertically = (isDirectionUpward, state) => {
+  const { rightOptions } = state
+  let selectedValues = retrieveValues(rightOptions)
+  let newRightOptions = R.clone(rightOptions)
+  R.forEach(
+    (value) => {
+      let index = R.findIndex(R.propEq('value', value), newRightOptions)
+      if (isDirectionUpward) {
+        // eslint-disable-next-line
+        index == 0 ? null : swap(index, index - 1)(newRightOptions)
+      } else {
+        // eslint-disable-next-line
+        ++index === rightOptions.length ? null : swap(index, index - 1)(newRightOptions)
+      }
+    },
+    selectedValues
+  )
+  return newRightOptions
 }

@@ -28,7 +28,10 @@ export default {
             'transform-class-properties',
             'transform-react-constant-elements',
             'add-module-exports',
-            'transform-react-remove-prop-types'
+            'transform-react-remove-prop-types',
+            'transform-react-constant-elements',
+            'transform-react-jsx-self',
+            'transform-react-jsx-source'
           ]
         },
         include
