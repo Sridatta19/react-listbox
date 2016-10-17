@@ -6,12 +6,59 @@
     <title>React Listbox Example</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="React, HTML, CSS, JavaScript, JSX, listbox, multi-select">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script type="text/javascript" src="../dist/react-listbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.14.0/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dist/react-listbox.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <script>
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+    <link rel="canonical" href="https://github.com/Sridatta19/react-listbox/">
 </head>
 
 <body>
-    <div id="root">
-        <p>I'm hosted with GitHub Pages.</p>
+    <header>
+        <h1>React Listbox</h1>
+        <h2>a double listbox react.js component</h2>
+        <a href="https://github.com/Sridatta19/react-listbox/" class="btn">View on Github</a>
+        <a href="#demo" class="btn demo">View demo</a>
+
+        <ul class="social-buttons">
+            <li>
+                <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=Sridatta19&amp;repo=react-listbox&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+            </li>
+            <li>
+                <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=Sridatta19&amp;repo=react-listbox&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
+            </li>
+            <li class="follow-btn">
+                <a class="twitter-follow-button" style="position: static; visibility: visible; width: 210px; height: 20px;" href="https://twitter.com/dattacrew19"> Follow @dattacrew19</a>
+            </li>
+            <li class="tweet-btn">
+                <a class="twitter-share-button" rel="canonical" href="https://twitter.com/intent/tweet?text=React%20Listbox">Tweet</a>
+            </li>
+        </ul>
+    </header>
+    <div id="demo">
+        <a href="demo"></a>
     </div>
+    <script type="text/babel" data-presets="react,latest" src="index.js"></script>
 </body>
 
 </html>

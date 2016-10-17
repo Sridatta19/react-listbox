@@ -21,8 +21,8 @@ npm install react-listbox --save
 
 ```javascript
 import ListBox from 'react-listbox'
-
 import 'react-listbox/dist/react-listbox.css'
+
 const options = [
   {label:'One', value: 1},
   {label:'Two', value: 2},
@@ -36,12 +36,11 @@ onChange = (selectedValues) => {
 <ListBox options={options} onChange={onChange} selected={selected}/>
 ```
 
-You can also use the browser build available in the dist folder. You just need to include the ionicons.woff in the appropriate destination
+You can also use the browser build available in the dist folder. You just need to include the ionicons.woff also in the appropriate destination
 
 ```html
-<script src="https://unpkg.com/react-listbox@1.1.0/dist/react-listbox.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/react-listbox@1.1.0/dist/react-listbox.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="react-listbox.css" media="screen"/>
 <link rel="stylesheet" href="https://unpkg.com/react-listbox@1.1.0/dist/react-listbox.css">
 ```
 

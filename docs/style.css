@@ -1,0 +1,300 @@
+body {
+    margin:0;
+    padding:0;
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    font-size:11px;
+}
+
+a {
+    color:#111;
+}
+
+a:hover {
+    text-decoration:none;
+}
+
+header {
+    background:url(header.jpg) center center #111;
+    text-align:center;
+    color:#fff;
+    position:relative;
+    padding:5em 5% 10em;
+    background-size:cover;
+}
+
+header h1 {
+    font-size:3em;
+    text-transform:uppercase;
+    margin-bottom:0.2em;
+    color:#fff;
+    letter-spacing:0.1em;
+    font-weight:500;
+}
+
+header h2 {
+    font-size:1.7em;
+    font-weight:400;
+    line-height:1.2;
+    color:#fff;
+    max-width:25em;
+    margin-bottom:1.5em;
+}
+
+header a {
+    color:#fff;
+}
+
+header .btn {
+    border:0.2em solid #fff;
+    color:#fff;
+    text-transform:uppercase;
+    padding:0.6em 1em;
+    font-weight:bold;
+    font-size:1.1em;
+    text-decoration:none;
+    margin:1em 0.5em;
+    display:inline-block;
+    transition:0.15s all ease;
+
+}
+
+header .btn:hover {
+    background:#fff;
+    color:#5e5d9d;
+    transition:0.15s all ease;
+}
+
+header span {
+    font-size:1em;
+    font-weight:normal;
+    text-transform:uppercase;
+    color:rgb(30, 128, 105);
+    position:absolute;
+    bottom:2em;
+    text-align:center;
+    left:0;
+    right:0;
+    letter-spacing:0.3em;
+}
+
+address {
+    display:inline;
+}
+
+address a {
+    color:rgb(30, 128, 105);
+}
+
+h1, h2, h3, h4, h5, h6, p, li, blockquote {
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h2, h3 {
+    margin:0 auto 0.2em;
+    color:#000;
+    font-weight:400;
+    line-height:1.2;
+}
+
+h2 {
+    font-size:3em;
+    max-width:60rem;
+    text-align:center;
+}
+
+h3, p {
+    max-width:60rem;
+}
+
+hr {
+    border:0;
+    border-bottom:1px solid #ddd;
+}
+
+.lead {
+    text-align:center;
+}
+
+p {
+    color:#65777c;
+    font-size:1.5em;
+    margin:0 auto 1.5em;
+    line-height:1.45;
+}
+
+blockquote {
+    color:#13b38f;
+    font-size:3em;
+    max-width:18em;
+    margin:1.5em auto;
+    border:0;
+    text-align:center;
+    line-height:1.2;
+    font-weight:300;
+    padding:0;
+}
+
+section {
+    padding:4em 5%;
+    text-align:center;
+    max-width:90%;
+    margin:0 auto;
+    overflow:hidden;
+}
+
+footer {
+    padding:6em 0 0em;
+    margin:0 auto;
+}
+
+footer hr {
+    border-color:#333;
+    margin:5em 0 0;
+}
+
+footer > div > * {
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:2em;
+}
+
+footer span {
+    color:#999;
+}
+
+section img {
+    max-width:90%;
+}
+
+h3 {
+    font-size:1.6em;
+}
+
+footer {
+    background:#000;
+    color:#fff;
+    text-align:center;
+}
+
+footer h2 {
+    color:#fff;
+    max-width:60em;
+    font-size:2.5em;
+}
+
+footer p {
+    color:#959DA0;
+    max-width:60em;
+    font-size:1.3em;
+}
+
+footer a {
+    text-decoration:none;
+    color:#eee;
+}
+
+footer a:hover {
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+    border-color:#fff;
+}
+
+
+footer .btn {
+    color:#eee;
+    text-decoration:none;
+    padding-bottom:0.2em;
+    display:inline-block;
+    margin:0 0.5em;
+    border-bottom:2px solid #ccc;
+}
+
+
+iframe {
+    border:0;
+}
+
+footer {
+    padding-left:10%;
+    padding-right:10%;
+}
+
+.social-buttons li {
+    list-style:none;
+    display:inline-block;
+    padding:1em;
+}
+
+#box > div {
+    text-align:left;
+}
+
+#box hr {
+    clear:both;
+    border-color:transparent;
+}
+
+
+footer > div {
+    padding:2em 0;
+    max-width:70em;
+    text-align:left;
+    margin:0 auto;
+}
+
+@media(min-width:764px) {
+    body {
+        font-size:13px;
+    }
+
+    #box > div {
+        width:30%;
+        float:left;
+        text-align:left;
+        margin:2em 0 0 3%;
+    }
+
+    #box > div p {
+        font-size:1.2em;
+    }
+
+    .logo {
+        position:absolute;
+        top:30px;
+        left:30px;
+    }
+
+    section {
+        max-width:70em;
+        padding:5em 5%;
+    }
+
+    header {
+        padding-top:10em;
+        padding-bottom:20em;
+    }
+
+    footer {
+        padding:5em 0 1em;
+    }
+
+    .social-buttons {
+        margin:5em 0 0;
+    }
+
+}
+
+@media(min-width:960px) {
+    body {
+        font-size:14px;
+    }
+
+    header h1 {
+        font-size:5em;
+    }
+
+    h3 {
+        font-size:1.5em;
+    }
+}
