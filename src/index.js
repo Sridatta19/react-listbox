@@ -34,6 +34,18 @@ class DoubleListBox extends Component {
     onChange: PropTypes.func
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { options, selected } = nextProps
+    this.setState({
+      leftOptions: options.filter(
+        option => !R.contains(option.value, selected)
+      ),
+      rightOptions: options.filter(
+        option => R.contains(option.value, selected)
+      )
+    })
+  }
+
   onLeftSelect = (obj) => {
     this.handleSelectedItem(obj, 'leftOptions')
   }
