@@ -319,6 +319,9 @@ div#demo {
 .container a{
   margin-right: 5px;
 }
+.container p{
+  margin-left: 0px;
+}
 .container img{
   border-radius: 3px;
 }
