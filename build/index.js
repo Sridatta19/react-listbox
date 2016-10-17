@@ -112,6 +112,21 @@ var DoubleListBox = function (_Component) {
   }
 
   _createClass(DoubleListBox, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var options = nextProps.options;
+      var selected = nextProps.selected;
+
+      this.setState({
+        leftOptions: options.filter(function (option) {
+          return !_ramda2.default.contains(option.value, selected);
+        }),
+        rightOptions: options.filter(function (option) {
+          return _ramda2.default.contains(option.value, selected);
+        })
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;

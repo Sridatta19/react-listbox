@@ -43,9 +43,9 @@ onChange = (selectedValues) => {
 You can also use the browser build available in the dist folder. You just need to include the ionicons.woff also in the appropriate destination
 
 ```html
-<script type="text/javascript" src="https://unpkg.com/react-listbox@1.2.0/dist/react-listbox.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/react-listbox@1.2.1/dist/react-listbox.min.js"></script>
 
-<link rel="stylesheet" href="https://unpkg.com/react-listbox@1.2.0/dist/react-listbox.css">
+<link rel="stylesheet" href="https://unpkg.com/react-listbox@1.2.1/dist/react-listbox.css">
 ```
 
 
