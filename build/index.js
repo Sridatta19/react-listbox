@@ -58,11 +58,13 @@ var DoubleListBox = function (_Component) {
       _this.handleSelectedItem(obj, 'leftOptions');
     }, _this.onRightSelect = function (obj) {
       _this.handleSelectedItem(obj, 'rightOptions');
-    }, _this.handleChange = function () {
-      var rightOptions = _this.state.rightOptions;
+    }, _this.handleChange = function (rightOptions) {
+      var onChange = _this.props.onChange;
 
-      var selectedValues = (0, _utils.retrieveValues)(rightOptions);
-      _this.props.onChange(selectedValues);
+      if (onChange) {
+        var selectedValues = _ramda2.default.map(_ramda2.default.prop('value'), rightOptions);
+        onChange(selectedValues);
+      }
     }, _this.handleSelectedItem = function (obj, stateLabel) {
       var newState = {};
       var value = _ramda2.default.keys(obj)[0];
@@ -75,12 +77,15 @@ var DoubleListBox = function (_Component) {
     }, _this.moveRight = function () {
       var newState = (0, _utils.moveLeftToRight)(_this.state);
       _this.setState(newState);
+      _this.handleChange(newState.rightOptions);
     }, _this.moveLeft = function () {
       var newState = (0, _utils.moveRightToLeft)(_this.state);
       _this.setState(newState);
+      _this.handleChange(newState.rightOptions);
     }, _this.moveVertically = function (isDirectionUpward) {
       var newRightOptions = (0, _utils.moveVertically)(isDirectionUpward, _this.state);
       _this.setState({ rightOptions: newRightOptions });
+      _this.handleChange(newRightOptions);
     }, _this.moveUp = function () {
       _this.moveVertically(true);
     }, _this.moveDown = function () {
@@ -95,9 +100,7 @@ var DoubleListBox = function (_Component) {
       _this.setState({ leftSearchTerm: event.target.value });
     }, _this.rightChange = function (event) {
       _this.setState({ rightSearchTerm: event.target.value });
-    }, _this.onKeyDown = function () {
-      console.log("KEYDOWN");
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _this.onKeyDown = function () {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(DoubleListBox, [{

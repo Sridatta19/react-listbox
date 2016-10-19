@@ -6,7 +6,6 @@ import { SelectableListItem, SelectedListItem } from './listItems'
 import {
   updateValueInCollection,
   removeValueInCollection,
-  retrieveValues,
   moveLeftToRight,
   moveRightToLeft,
   moveVertically
@@ -16,7 +15,7 @@ class DoubleListBox extends Component {
 
   state = {
     leftOptions: this.props.options.map(
-      option => {
+      (option) => {
         if (R.contains(option.value, this.props.selected)) {
           return R.set(R.lensProp('hidden'), true, option)
         }
@@ -60,10 +59,12 @@ class DoubleListBox extends Component {
     this.handleSelectedItem(obj, 'rightOptions')
   }
 
-  handleChange = () => {
-    const { rightOptions } = this.state
-    let selectedValues = retrieveValues(rightOptions)
-    this.props.onChange(selectedValues)
+  handleChange = (rightOptions) => {
+    const { onChange } = this.props
+    if (onChange) {
+      let selectedValues = R.map(R.prop('value'), rightOptions)
+      onChange(selectedValues)
+    }
   }
 
   handleSelectedItem = (obj, stateLabel) => {
@@ -80,16 +81,19 @@ class DoubleListBox extends Component {
   moveRight = () => {
     const newState = moveLeftToRight(this.state)
     this.setState(newState)
+    this.handleChange(newState.rightOptions)
   }
 
   moveLeft = () => {
     const newState = moveRightToLeft(this.state)
     this.setState(newState)
+    this.handleChange(newState.rightOptions)
   }
 
   moveVertically = (isDirectionUpward) => {
     const newRightOptions = moveVertically(isDirectionUpward, this.state)
     this.setState({ rightOptions: newRightOptions })
+    this.handleChange(newRightOptions)
   }
 
   moveUp = () => {
@@ -125,7 +129,7 @@ class DoubleListBox extends Component {
   }
 
   onKeyDown = () => {
-    console.log("KEYDOWN")
+
   }
 
   render() {

@@ -94,16 +94,16 @@
 .ms-container .ms-selectable li.selected,
 .ms-container .ms-selection li.selected {
   color: #fff;
-  background-color: #4444b6;
+  background-color: #6969c4 !important;
   border-bottom: 1px darkgrey solid;
 }
 
-.ms-container .ms-selectable li.ms-hover,
-.ms-container .ms-selection li.ms-hover{
+.ms-container .ms-selectable li:hover,
+.ms-container .ms-selection li:hover{
   cursor: pointer;
   color: #fff;
   text-decoration: none;
-  background-color: #08c;
+  background-color: #8e8ed3;
 }
 
 .ms-container .ms-selectable li.disabled,
