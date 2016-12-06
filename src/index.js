@@ -41,14 +41,21 @@ class DoubleListBox extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { options, selected } = nextProps
-    this.setState({
-      leftOptions: options.filter(
-        option => !R.contains(option.value, selected)
-      ),
-      rightOptions: options.filter(
-        option => R.contains(option.value, selected)
-      )
-    })
+    if (R.isEmpty(this.state.leftOptions) && R.isEmpty(this.state.rightOptions)) {
+      this.setState({
+        leftOptions: options.map(
+          (option) => {
+            if (R.contains(option.value, this.props.selected)) {
+              return R.set(R.lensProp('hidden'), true, option)
+            }
+            return option
+          }
+        ),
+        rightOptions: options.filter(
+          option => R.contains(option.value, selected)
+        )
+      })
+    }
   }
 
   onLeftSelect = (obj) => {

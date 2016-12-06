@@ -1,13 +1,12 @@
 
 import React, { PropTypes } from 'react'
-import classNames from 'classnames'
 import { alphaNumericProp } from './utils'
 
 export const SelectableListItem = (props) => {
-  let listStyle = classNames({
-    'ms-elem-selectable': true,
-    selected: props.isSelected
-  })
+  let listStyle = 'ms-elem-selectable'
+  if (props.isSelected) {
+    listStyle += ' selected'
+  }
   return (
     <ListItem listStyle={listStyle} {...props} />
   )
@@ -18,10 +17,10 @@ SelectableListItem.propTypes = {
 }
 
 export const SelectedListItem = (props) => {
-  let listStyle = classNames({
-    'ms-elem-selection ms-selected': true,
-    selected: props.isSelected
-  })
+  let listStyle = 'ms-elem-selection ms-selected'
+  if (props.isSelected) {
+    listStyle += ' selected'
+  }
   return (
     <ListItem listStyle={listStyle} {...props} />
   )

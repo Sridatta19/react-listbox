@@ -65,7 +65,7 @@ const addHideAndDropSelected = R.compose(
 export const moveLeftToRight = (state) => {
   const newState = {}
   newState.leftOptions = state.leftOptions.map(
-    option => {
+    (option) => {
       if (isSelected(option)) {
         return addHideAndDropSelected(option)
       }
@@ -84,7 +84,7 @@ export const moveRightToLeft = (state) => {
   newState.rightOptions = R.filter(R.propEq('isSelected', undefined), state.rightOptions)
   const selectedRightValues = filterAndRetrieveSelectedValues(state.rightOptions)
   newState.leftOptions = state.leftOptions.map(
-    option => {
+    (option) => {
       if (R.contains(option.value, selectedRightValues)) {
         return R.omit('hidden', option)
       }

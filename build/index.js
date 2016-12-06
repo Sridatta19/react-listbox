@@ -106,22 +106,29 @@ var DoubleListBox = function (_Component) {
   _createClass(DoubleListBox, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
       var options = nextProps.options;
       var selected = nextProps.selected;
 
-      this.setState({
-        leftOptions: options.filter(function (option) {
-          return !_ramda2.default.contains(option.value, selected);
-        }),
-        rightOptions: options.filter(function (option) {
-          return _ramda2.default.contains(option.value, selected);
-        })
-      });
+      if (_ramda2.default.isEmpty(this.state.leftOptions) && _ramda2.default.isEmpty(this.state.rightOptions)) {
+        this.setState({
+          leftOptions: options.map(function (option) {
+            if (_ramda2.default.contains(option.value, _this2.props.selected)) {
+              return _ramda2.default.set(_ramda2.default.lensProp('hidden'), true, option);
+            }
+            return option;
+          }),
+          rightOptions: options.filter(function (option) {
+            return _ramda2.default.contains(option.value, selected);
+          })
+        });
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _state = this.state;
       var leftOptions = _state.leftOptions;
@@ -148,7 +155,7 @@ var DoubleListBox = function (_Component) {
                 key: o.value,
                 value: o.value,
                 label: o.label,
-                onSelect: _this2.onLeftSelect,
+                onSelect: _this3.onLeftSelect,
                 isSelected: o.isSelected
               });
             })
@@ -173,7 +180,7 @@ var DoubleListBox = function (_Component) {
                 key: o.value,
                 value: o.value,
                 label: o.label,
-                onSelect: _this2.onRightSelect,
+                onSelect: _this3.onRightSelect,
                 isSelected: o.isSelected
               });
             })

@@ -11,19 +11,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
 var _utils = require('./utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SelectableListItem = exports.SelectableListItem = function SelectableListItem(props) {
-  var listStyle = (0, _classnames2.default)({
-    'ms-elem-selectable': true,
-    selected: props.isSelected
-  });
+  var listStyle = 'ms-elem-selectable';
+  if (props.isSelected) {
+    listStyle += ' selected';
+  }
   return _react2.default.createElement(ListItem, _extends({ listStyle: listStyle }, props));
 };
 
@@ -32,10 +28,10 @@ SelectableListItem.propTypes = {
 };
 
 var SelectedListItem = exports.SelectedListItem = function SelectedListItem(props) {
-  var listStyle = (0, _classnames2.default)({
-    'ms-elem-selection ms-selected': true,
-    selected: props.isSelected
-  });
+  var listStyle = 'ms-elem-selection ms-selected';
+  if (props.isSelected) {
+    listStyle += ' selected';
+  }
   return _react2.default.createElement(ListItem, _extends({ listStyle: listStyle }, props));
 };
 
