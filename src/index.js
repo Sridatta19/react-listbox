@@ -78,9 +78,9 @@ class DoubleListBox extends Component {
     const newState = {}
     const value = R.keys(obj)[0]
     if (obj[value]) {
-      newState[stateLabel] = removeValueInCollection(+value, this.state[stateLabel])
+      newState[stateLabel] = removeValueInCollection(value, this.state[stateLabel])
     } else {
-      newState[stateLabel] = updateValueInCollection(+value, this.state[stateLabel])
+      newState[stateLabel] = updateValueInCollection(value, this.state[stateLabel])
     }
     this.setState(newState)
   }

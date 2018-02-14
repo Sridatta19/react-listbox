@@ -69,9 +69,9 @@ var DoubleListBox = function (_Component) {
       var newState = {};
       var value = _ramda2.default.keys(obj)[0];
       if (obj[value]) {
-        newState[stateLabel] = (0, _utils.removeValueInCollection)(+value, _this.state[stateLabel]);
+        newState[stateLabel] = (0, _utils.removeValueInCollection)(value, _this.state[stateLabel]);
       } else {
-        newState[stateLabel] = (0, _utils.updateValueInCollection)(+value, _this.state[stateLabel]);
+        newState[stateLabel] = (0, _utils.updateValueInCollection)(value, _this.state[stateLabel]);
       }
       _this.setState(newState);
     }, _this.moveRight = function () {
@@ -108,8 +108,8 @@ var DoubleListBox = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this2 = this;
 
-      var options = nextProps.options;
-      var selected = nextProps.selected;
+      var options = nextProps.options,
+          selected = nextProps.selected;
 
       if (_ramda2.default.isEmpty(this.state.leftOptions) && _ramda2.default.isEmpty(this.state.rightOptions)) {
         this.setState({
@@ -130,11 +130,11 @@ var DoubleListBox = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var _state = this.state;
-      var leftOptions = _state.leftOptions;
-      var rightOptions = _state.rightOptions;
-      var leftSearchTerm = _state.leftSearchTerm;
-      var rightSearchTerm = _state.rightSearchTerm;
+      var _state = this.state,
+          leftOptions = _state.leftOptions,
+          rightOptions = _state.rightOptions,
+          leftSearchTerm = _state.leftSearchTerm,
+          rightSearchTerm = _state.rightSearchTerm;
 
       return _react2.default.createElement(
         'div',
