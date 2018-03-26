@@ -128,7 +128,19 @@ var DoubleListBox = function (_Component) {
         this.setState({
           leftOptions:  []       });
       }
- 
+      else {
+        this.setState({
+          leftOptions: options.map(function (option) {
+            if (_ramda2.default.contains(option.value, _this2.props.selected)) {
+              return _ramda2.default.set(_ramda2.default.lensProp('hidden'), true, option);
+            }
+            return option;
+          }),
+          rightOptions: options.filter(function (option) {
+            return _ramda2.default.contains(option.value, selected);
+          })
+        });
+      } 
     }
   }, {
     key: 'render',
