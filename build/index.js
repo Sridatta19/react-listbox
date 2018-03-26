@@ -124,6 +124,11 @@ var DoubleListBox = function (_Component) {
           })
         });
       }
+      else if (nextProps.options.length == 0) {
+        this.setState({
+          leftOptions:  []       });
+      }
+ 
     }
   }, {
     key: 'render',
