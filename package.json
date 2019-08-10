@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "mocha --compilers js:babel-core/register --recursive tests/**/*.spec.js --require tests/setup.js",
+    "test": "mocha --require babel-core/register --recursive tests/**/*.spec.js --require tests/setup.js",
     "prebuild": "rimraf build && rimraf dist",
     "build": "npm-run-all --parallel build:*",
     "build:main": "babel --copy-files --out-dir build src",
