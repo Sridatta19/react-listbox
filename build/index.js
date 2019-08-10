@@ -91,11 +91,13 @@ var DoubleListBox = function (_Component) {
     }, _this.moveDown = function () {
       _this.moveVertically(false);
     }, _this.moveTop = function () {
-      _this.setState({ rightOptions: _ramda2.default.concat(_ramda2.default.filter(_ramda2.default.propEq('isSelected', true), _this.state.rightOptions), _ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state.rightOptions))
-      });
+      var rightOptions = _ramda2.default.concat(_ramda2.default.filter(_ramda2.default.propEq('isSelected', true), _this.state.rightOptions), _ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state.rightOptions));
+      _this.setState({ rightOptions: rightOptions });
+      _this.handleChange(rightOptions);
     }, _this.moveBottom = function () {
-      _this.setState({ rightOptions: _ramda2.default.concat(_ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state.rightOptions), _ramda2.default.filter(_ramda2.default.propEq('isSelected', true), _this.state.rightOptions))
-      });
+      var rightOptions = _ramda2.default.concat(_ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state.rightOptions), _ramda2.default.filter(_ramda2.default.propEq('isSelected', true), _this.state.rightOptions));
+      _this.setState({ rightOptions: rightOptions });
+      _this.handleChange(rightOptions);
     }, _this.leftChange = function (event) {
       _this.setState({ leftSearchTerm: event.target.value });
     }, _this.rightChange = function (event) {
@@ -108,8 +110,8 @@ var DoubleListBox = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this2 = this;
 
-      var options = nextProps.options;
-      var selected = nextProps.selected;
+      var options = nextProps.options,
+          selected = nextProps.selected;
 
       if (_ramda2.default.isEmpty(this.state.leftOptions) && _ramda2.default.isEmpty(this.state.rightOptions)) {
         this.setState({
@@ -130,11 +132,11 @@ var DoubleListBox = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var _state = this.state;
-      var leftOptions = _state.leftOptions;
-      var rightOptions = _state.rightOptions;
-      var leftSearchTerm = _state.leftSearchTerm;
-      var rightSearchTerm = _state.rightSearchTerm;
+      var _state = this.state,
+          leftOptions = _state.leftOptions,
+          rightOptions = _state.rightOptions,
+          leftSearchTerm = _state.leftSearchTerm,
+          rightSearchTerm = _state.rightSearchTerm;
 
       return _react2.default.createElement(
         'div',
@@ -202,4 +204,4 @@ DoubleListBox.propTypes = {
   onChange: _react.PropTypes.func
 };
 exports.default = DoubleListBox;
-module.exports = exports['default'];
+module.exports = exports.default;

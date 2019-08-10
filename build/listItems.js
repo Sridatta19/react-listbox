@@ -40,11 +40,11 @@ SelectedListItem.propTypes = {
 };
 
 var ListItem = function ListItem(_ref) {
-  var label = _ref.label;
-  var value = _ref.value;
-  var isSelected = _ref.isSelected;
-  var onSelect = _ref.onSelect;
-  var listStyle = _ref.listStyle;
+  var label = _ref.label,
+      value = _ref.value,
+      isSelected = _ref.isSelected,
+      onSelect = _ref.onSelect,
+      listStyle = _ref.listStyle;
 
   var onListClick = function onListClick() {
     var bindObject = {};
