@@ -112,19 +112,21 @@ class DoubleListBox extends Component {
   }
 
   moveTop = () => {
-    this.setState({ rightOptions: R.concat(
-        R.filter(R.propEq('isSelected', true), this.state.rightOptions),
-        R.filter(R.propEq('isSelected', undefined), this.state.rightOptions)
-      )
-    })
+    const rightOptions = R.concat(
+      R.filter(R.propEq('isSelected', true), this.state.rightOptions),
+      R.filter(R.propEq('isSelected', undefined), this.state.rightOptions)
+    )
+    this.setState({ rightOptions });
+    this.handleChange(rightOptions);
   }
 
   moveBottom = () => {
-    this.setState({ rightOptions: R.concat(
-        R.filter(R.propEq('isSelected', undefined), this.state.rightOptions),
-        R.filter(R.propEq('isSelected', true), this.state.rightOptions)
-      )
-    })
+    const rightOptions = R.concat(
+      R.filter(R.propEq('isSelected', undefined), this.state.rightOptions),
+      R.filter(R.propEq('isSelected', true), this.state.rightOptions)
+    )
+    this.setState({ rightOptions });
+    this.handleChange(rightOptions);
   }
 
   leftChange = (event) => {

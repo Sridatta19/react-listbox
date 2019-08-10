@@ -35,11 +35,9 @@
   },
   "homepage": "https://github.com/Sridatta19/react-listbox#readme",
   "dependencies": {
-    "ramda": "0.26.1"
-  },
-  "peerDependencies": {
-    "react": "^0.14 || ^15.0.0-rc || ^15.0",
-    "react-dom": "^0.14 || ^15.0.0-rc || ^15.0"
+    "ramda": "0.26.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   },
   "devDependencies": {
     "autoprefixer": "9.6.1",
