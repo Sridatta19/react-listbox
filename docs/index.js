@@ -16,7 +16,7 @@ let App = () => (
     <p>A simple listbox component for React.</p>
     <div className="install">
       <h2>Installation</h2>
-      <p><code>npm install react-datepicker --save</code></p>
+      <p><code>npm install react-listbox --save</code></p>
     </div>
     <div className="listbox">
       <DoubleListBox options={options}/>
