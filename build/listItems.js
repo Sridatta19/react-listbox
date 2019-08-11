@@ -1,40 +1,48 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SelectedListItem = exports.SelectableListItem = undefined;
+exports.SelectedListItem = exports.SelectableListItem = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _react = _interopRequireWildcard(require("react"));
 
-var _react = require('react');
+var _utils = require("./utils");
 
-var _react2 = _interopRequireDefault(_react);
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-var _utils = require('./utils');
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var SelectableListItem = exports.SelectableListItem = function SelectableListItem(props) {
+var SelectableListItem = function SelectableListItem(props) {
   var listStyle = 'ms-elem-selectable';
+
   if (props.isSelected) {
     listStyle += ' selected';
   }
-  return _react2.default.createElement(ListItem, _extends({ listStyle: listStyle }, props));
+
+  return _react["default"].createElement(ListItem, _extends({
+    listStyle: listStyle
+  }, props));
 };
 
+exports.SelectableListItem = SelectableListItem;
 SelectableListItem.propTypes = {
   isSelected: _react.PropTypes.bool
 };
 
-var SelectedListItem = exports.SelectedListItem = function SelectedListItem(props) {
+var SelectedListItem = function SelectedListItem(props) {
   var listStyle = 'ms-elem-selection ms-selected';
+
   if (props.isSelected) {
     listStyle += ' selected';
   }
-  return _react2.default.createElement(ListItem, _extends({ listStyle: listStyle }, props));
+
+  return _react["default"].createElement(ListItem, _extends({
+    listStyle: listStyle
+  }, props));
 };
 
+exports.SelectedListItem = SelectedListItem;
 SelectedListItem.propTypes = {
   isSelected: _react.PropTypes.bool
 };
@@ -51,15 +59,11 @@ var ListItem = function ListItem(_ref) {
     bindObject[value] = isSelected;
     onSelect(bindObject);
   };
-  return _react2.default.createElement(
-    'li',
-    { className: listStyle, onClick: onListClick },
-    _react2.default.createElement(
-      'span',
-      null,
-      label
-    )
-  );
+
+  return _react["default"].createElement("li", {
+    className: listStyle,
+    onClick: onListClick
+  }, _react["default"].createElement("span", null, label));
 };
 
 ListItem.propTypes = {

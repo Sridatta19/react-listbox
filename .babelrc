@@ -1,8 +1,11 @@
 {
-  "presets":  ["latest", "react"],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
   "plugins": [
-    "transform-class-properties",
-    "transform-react-constant-elements",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-react-constant-elements",
     "add-module-exports"
   ]
 }

@@ -12,26 +12,24 @@ export default {
     library: 'DoubleListBox',
   },
   plugins: [
-    new ExtractTextPlugin('react-listbox.css')
+    new ExtractTextPlugin({
+      filename: "react-listbox.css"
+    })
   ],
   devtool: 'eval',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           cacheDirectory: true,
           babelrc: false,
-          presets: ['react', 'latest'],
+          presets: ['@babel/preset-react', '@babel/preset-env'],
           plugins: [
-            'transform-class-properties',
-            'transform-react-constant-elements',
-            'add-module-exports',
-            'transform-react-remove-prop-types',
-            'transform-react-constant-elements',
-            'transform-react-jsx-self',
-            'transform-react-jsx-source'
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-transform-react-constant-elements',
+            'add-module-exports'
           ]
         },
         include
@@ -45,7 +43,7 @@ export default {
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'file',
+        loader: 'file-loader',
         query: {
           name: 'fonts/[name].[ext]'
         }

@@ -1,207 +1,286 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = _interopRequireWildcard(require("react"));
 
-var _react = require('react');
+var _ramda = _interopRequireDefault(require("ramda"));
 
-var _react2 = _interopRequireDefault(_react);
+var _selectionPanels = require("./selectionPanels");
 
-var _ramda = require('ramda');
+var _listItems = require("./listItems");
 
-var _ramda2 = _interopRequireDefault(_ramda);
+var _utils = require("./utils");
 
-var _selectionPanels = require('./selectionPanels');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _listItems = require('./listItems');
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-var _utils = require('./utils');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var DoubleListBox = function (_Component) {
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var DoubleListBox =
+/*#__PURE__*/
+function (_Component) {
   _inherits(DoubleListBox, _Component);
 
   function DoubleListBox() {
-    var _ref;
+    var _getPrototypeOf2;
 
-    var _temp, _this, _ret;
+    var _this;
 
     _classCallCheck(this, DoubleListBox);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DoubleListBox.__proto__ || Object.getPrototypeOf(DoubleListBox)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DoubleListBox)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
       leftOptions: _this.props.options.map(function (option) {
-        if (_ramda2.default.contains(option.value, _this.props.selected)) {
-          return _ramda2.default.set(_ramda2.default.lensProp('hidden'), true, option);
+        if (_ramda["default"].contains(option.value, _this.props.selected)) {
+          return _ramda["default"].set(_ramda["default"].lensProp('hidden'), true, option);
         }
+
         return option;
       }),
       rightOptions: _this.props.options.filter(function (option) {
-        return _ramda2.default.contains(option.value, _this.props.selected);
+        return _ramda["default"].contains(option.value, _this.props.selected);
       }),
       leftSearchTerm: '',
       rightSearchTerm: ''
-    }, _this.onLeftSelect = function (obj) {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onLeftSelect", function (obj) {
       _this.handleSelectedItem(obj, 'leftOptions');
-    }, _this.onRightSelect = function (obj) {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onRightSelect", function (obj) {
       _this.handleSelectedItem(obj, 'rightOptions');
-    }, _this.handleChange = function (rightOptions) {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (rightOptions) {
       var onChange = _this.props.onChange;
 
       if (onChange) {
-        var selectedValues = _ramda2.default.map(_ramda2.default.prop('value'), rightOptions);
+        var selectedValues = _ramda["default"].map(_ramda["default"].prop('value'), rightOptions);
+
         onChange(selectedValues);
       }
-    }, _this.handleSelectedItem = function (obj, stateLabel) {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSelectedItem", function (obj, stateLabel) {
       var newState = {};
-      var value = _ramda2.default.keys(obj)[0];
+
+      var value = _ramda["default"].keys(obj)[0];
+
       if (obj[value]) {
         newState[stateLabel] = (0, _utils.removeValueInCollection)(+value, _this.state[stateLabel]);
       } else {
         newState[stateLabel] = (0, _utils.updateValueInCollection)(+value, _this.state[stateLabel]);
       }
+
       _this.setState(newState);
-    }, _this.moveRight = function () {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveRight", function () {
       var newState = (0, _utils.moveLeftToRight)(_this.state);
+
       _this.setState(newState);
+
       _this.handleChange(newState.rightOptions);
-    }, _this.moveLeft = function () {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveLeft", function () {
       var newState = (0, _utils.moveRightToLeft)(_this.state);
+
       _this.setState(newState);
+
       _this.handleChange(newState.rightOptions);
-    }, _this.moveVertically = function (isDirectionUpward) {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveVertically", function (isDirectionUpward) {
       var newRightOptions = (0, _utils.moveVertically)(isDirectionUpward, _this.state);
-      _this.setState({ rightOptions: newRightOptions });
+
+      _this.setState({
+        rightOptions: newRightOptions
+      });
+
       _this.handleChange(newRightOptions);
-    }, _this.moveUp = function () {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveUp", function () {
       _this.moveVertically(true);
-    }, _this.moveDown = function () {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveDown", function () {
       _this.moveVertically(false);
-    }, _this.moveTop = function () {
-      var rightOptions = _ramda2.default.concat(_ramda2.default.filter(_ramda2.default.propEq('isSelected', true), _this.state.rightOptions), _ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state.rightOptions));
-      _this.setState({ rightOptions: rightOptions });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveTop", function () {
+      var rightOptions = _ramda["default"].concat(_ramda["default"].filter(_ramda["default"].propEq('isSelected', true), _this.state.rightOptions), _ramda["default"].filter(_ramda["default"].propEq('isSelected', undefined), _this.state.rightOptions));
+
+      _this.setState({
+        rightOptions: rightOptions
+      });
+
       _this.handleChange(rightOptions);
-    }, _this.moveBottom = function () {
-      var rightOptions = _ramda2.default.concat(_ramda2.default.filter(_ramda2.default.propEq('isSelected', undefined), _this.state.rightOptions), _ramda2.default.filter(_ramda2.default.propEq('isSelected', true), _this.state.rightOptions));
-      _this.setState({ rightOptions: rightOptions });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "moveBottom", function () {
+      var rightOptions = _ramda["default"].concat(_ramda["default"].filter(_ramda["default"].propEq('isSelected', undefined), _this.state.rightOptions), _ramda["default"].filter(_ramda["default"].propEq('isSelected', true), _this.state.rightOptions));
+
+      _this.setState({
+        rightOptions: rightOptions
+      });
+
       _this.handleChange(rightOptions);
-    }, _this.leftChange = function (event) {
-      _this.setState({ leftSearchTerm: event.target.value });
-    }, _this.rightChange = function (event) {
-      _this.setState({ rightSearchTerm: event.target.value });
-    }, _this.onKeyDown = function () {}, _temp), _possibleConstructorReturn(_this, _ret);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "leftChange", function (event) {
+      _this.setState({
+        leftSearchTerm: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "rightChange", function (event) {
+      _this.setState({
+        rightSearchTerm: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onKeyDown", function () {});
+
+    return _this;
   }
 
   _createClass(DoubleListBox, [{
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       var _this2 = this;
 
       var options = nextProps.options,
           selected = nextProps.selected;
 
-      if (_ramda2.default.isEmpty(this.state.leftOptions) && _ramda2.default.isEmpty(this.state.rightOptions)) {
+      if (_ramda["default"].isEmpty(this.state.leftOptions) && _ramda["default"].isEmpty(this.state.rightOptions)) {
         this.setState({
           leftOptions: options.map(function (option) {
-            if (_ramda2.default.contains(option.value, _this2.props.selected)) {
-              return _ramda2.default.set(_ramda2.default.lensProp('hidden'), true, option);
+            if (_ramda["default"].contains(option.value, _this2.props.selected)) {
+              return _ramda["default"].set(_ramda["default"].lensProp('hidden'), true, option);
             }
+
             return option;
           }),
           rightOptions: options.filter(function (option) {
-            return _ramda2.default.contains(option.value, selected);
+            return _ramda["default"].contains(option.value, selected);
           })
         });
       }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this3 = this;
 
-      var _state = this.state,
-          leftOptions = _state.leftOptions,
-          rightOptions = _state.rightOptions,
-          leftSearchTerm = _state.leftSearchTerm,
-          rightSearchTerm = _state.rightSearchTerm;
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'ms-container', id: 'ms-pre-selected-options' },
-        _react2.default.createElement(
-          'div',
-          { className: 'ms-selectable' },
-          _react2.default.createElement('input', { type: 'text', className: 'search-input', onChange: this.leftChange, autoComplete: 'off', placeholder: 'Search' }),
-          _react2.default.createElement(
-            'ul',
-            { className: 'ms-list', tabIndex: '-1', onKeyDown: this.onKeyDown },
-            leftOptions.filter(function (lo) {
-              return !lo.hidden === true;
-            }).filter(function (lo) {
-              return lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1;
-            }).map(function (o) {
-              return _react2.default.createElement(_listItems.SelectableListItem, {
-                key: o.value,
-                value: o.value,
-                label: o.label,
-                onSelect: _this3.onLeftSelect,
-                isSelected: o.isSelected
-              });
-            })
-          )
-        ),
-        _react2.default.createElement(_selectionPanels.SelectionPanel, { moveRight: this.moveRight, moveLeft: this.moveLeft }),
-        _react2.default.createElement(_selectionPanels.SelectionPanel2, {
-          moveTop: this.moveTop, moveBottom: this.moveBottom,
-          moveUp: this.moveUp, moveDown: this.moveDown
-        }),
-        _react2.default.createElement(
-          'div',
-          { className: 'ms-selection' },
-          _react2.default.createElement('input', { type: 'text', className: 'search-input', onChange: this.rightChange, autoComplete: 'off', placeholder: 'Search' }),
-          _react2.default.createElement(
-            'ul',
-            { className: 'ms-list', tabIndex: '-1' },
-            rightOptions.filter(function (ro) {
-              return ro.label.toLowerCase().indexOf(rightSearchTerm.toLowerCase()) !== -1;
-            }).map(function (o) {
-              return _react2.default.createElement(_listItems.SelectedListItem, {
-                key: o.value,
-                value: o.value,
-                label: o.label,
-                onSelect: _this3.onRightSelect,
-                isSelected: o.isSelected
-              });
-            })
-          )
-        )
-      );
+      var _this$state = this.state,
+          leftOptions = _this$state.leftOptions,
+          rightOptions = _this$state.rightOptions,
+          leftSearchTerm = _this$state.leftSearchTerm,
+          rightSearchTerm = _this$state.rightSearchTerm;
+      return _react["default"].createElement("div", {
+        className: "ms-container",
+        id: "ms-pre-selected-options"
+      }, _react["default"].createElement("div", {
+        className: "ms-selectable"
+      }, _react["default"].createElement("input", {
+        type: "text",
+        className: "search-input",
+        onChange: this.leftChange,
+        autoComplete: "off",
+        placeholder: "Search"
+      }), _react["default"].createElement("ul", {
+        className: "ms-list",
+        tabIndex: "-1",
+        onKeyDown: this.onKeyDown
+      }, leftOptions.filter(function (lo) {
+        return !lo.hidden === true;
+      }).filter(function (lo) {
+        return lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1;
+      }).map(function (o) {
+        return _react["default"].createElement(_listItems.SelectableListItem, {
+          key: o.value,
+          value: o.value,
+          label: o.label,
+          onSelect: _this3.onLeftSelect,
+          isSelected: o.isSelected
+        });
+      }))), _react["default"].createElement(_selectionPanels.SelectionPanel, {
+        moveRight: this.moveRight,
+        moveLeft: this.moveLeft
+      }), _react["default"].createElement(_selectionPanels.SelectionPanel2, {
+        moveTop: this.moveTop,
+        moveBottom: this.moveBottom,
+        moveUp: this.moveUp,
+        moveDown: this.moveDown
+      }), _react["default"].createElement("div", {
+        className: "ms-selection"
+      }, _react["default"].createElement("input", {
+        type: "text",
+        className: "search-input",
+        onChange: this.rightChange,
+        autoComplete: "off",
+        placeholder: "Search"
+      }), _react["default"].createElement("ul", {
+        className: "ms-list",
+        tabIndex: "-1"
+      }, rightOptions.filter(function (ro) {
+        return ro.label.toLowerCase().indexOf(rightSearchTerm.toLowerCase()) !== -1;
+      }).map(function (o) {
+        return _react["default"].createElement(_listItems.SelectedListItem, {
+          key: o.value,
+          value: o.value,
+          label: o.label,
+          onSelect: _this3.onRightSelect,
+          isSelected: o.isSelected
+        });
+      }))));
     }
   }]);
 
   return DoubleListBox;
 }(_react.Component);
 
-DoubleListBox.defaultProps = {
+_defineProperty(DoubleListBox, "defaultProps", {
   selected: []
-};
-DoubleListBox.propTypes = {
+});
+
+_defineProperty(DoubleListBox, "propTypes", {
   options: _react.PropTypes.array,
   selected: _react.PropTypes.array,
   onChange: _react.PropTypes.func
-};
-exports.default = DoubleListBox;
+});
+
+var _default = DoubleListBox;
+exports["default"] = _default;
 module.exports = exports.default;
