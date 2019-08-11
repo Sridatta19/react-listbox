@@ -5,16 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.moveVertically = exports.moveRightToLeft = exports.moveLeftToRight = exports.alphaNumericProp = exports.retrieveValues = exports.swap = exports.removeValueInCollection = exports.updateValueInCollection = void 0;
 
-var _ramda = _interopRequireDefault(require("ramda"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var updateCollection = function updateCollection(value, collection, newValue) {
-  var index = _ramda["default"].findIndex(_ramda["default"].propEq('value', value), collection);
+var R = require('ramda');
 
-  return _ramda["default"].over(_ramda["default"].lensIndex(index), _ramda["default"].assoc('isSelected', newValue), collection);
+var updateCollection = function updateCollection(value, collection, newValue) {
+  var index = R.findIndex(R.propEq('value', value), collection);
+  return R.over(R.lensIndex(index), R.assoc('isSelected', newValue), collection);
 };
 
 var updateValueInCollection = function updateValueInCollection(value, collection) {
@@ -28,12 +25,9 @@ var removeValueInCollection = function removeValueInCollection(value, collection
 };
 
 exports.removeValueInCollection = removeValueInCollection;
-
-var isSelected = _ramda["default"].propEq('isSelected', true);
-
-var filterAndTransformSelected = _ramda["default"].compose(_ramda["default"].map(_ramda["default"].omit('isSelected')), _ramda["default"].filter(isSelected));
-
-var filterAndRetrieveSelectedValues = _ramda["default"].compose(_ramda["default"].map(_ramda["default"].prop('value')), _ramda["default"].filter(isSelected));
+var isSelected = R.propEq('isSelected', true);
+var filterAndTransformSelected = R.compose(R.map(R.omit('isSelected')), R.filter(isSelected));
+var filterAndRetrieveSelectedValues = R.compose(R.map(R.prop('value')), R.filter(isSelected));
 
 var swap = function swap(x, y) {
   return function (collection) {
@@ -47,7 +41,7 @@ var swap = function swap(x, y) {
 exports.swap = swap;
 
 var retrieveValues = function retrieveValues(collection) {
-  return _ramda["default"].map(_ramda["default"].prop('value'), _ramda["default"].filter(isSelected, collection));
+  return R.map(R.prop('value'), R.filter(isSelected, collection));
 };
 
 exports.retrieveValues = retrieveValues;
@@ -69,8 +63,7 @@ var alphaNumericProp = function alphaNumericProp(props, propName, componentName)
 };
 
 exports.alphaNumericProp = alphaNumericProp;
-
-var addHideAndDropSelected = _ramda["default"].compose(_ramda["default"].set(_ramda["default"].lensProp('hidden'), true), _ramda["default"].omit('isSelected'));
+var addHideAndDropSelected = R.compose(R.set(R.lensProp('hidden'), true), R.omit('isSelected'));
 
 var moveLeftToRight = function moveLeftToRight(state) {
   var newState = {};
@@ -81,7 +74,7 @@ var moveLeftToRight = function moveLeftToRight(state) {
 
     return option;
   });
-  newState.rightOptions = _ramda["default"].concat(state.rightOptions, filterAndTransformSelected(state.leftOptions));
+  newState.rightOptions = R.concat(state.rightOptions, filterAndTransformSelected(state.leftOptions));
   return newState;
 };
 
@@ -89,11 +82,11 @@ exports.moveLeftToRight = moveLeftToRight;
 
 var moveRightToLeft = function moveRightToLeft(state) {
   var newState = {};
-  newState.rightOptions = _ramda["default"].filter(_ramda["default"].propEq('isSelected', undefined), state.rightOptions);
+  newState.rightOptions = R.filter(R.propEq('isSelected', undefined), state.rightOptions);
   var selectedRightValues = filterAndRetrieveSelectedValues(state.rightOptions);
   newState.leftOptions = state.leftOptions.map(function (option) {
-    if (_ramda["default"].contains(option.value, selectedRightValues)) {
-      return _ramda["default"].omit('hidden', option);
+    if (R.contains(option.value, selectedRightValues)) {
+      return R.omit('hidden', option);
     }
 
     return option;
@@ -106,11 +99,9 @@ exports.moveRightToLeft = moveRightToLeft;
 var moveVertically = function moveVertically(isDirectionUpward, state) {
   var rightOptions = state.rightOptions;
   var selectedValues = retrieveValues(rightOptions);
-
-  var newRightOptions = _ramda["default"].clone(rightOptions);
-
-  _ramda["default"].forEach(function (value) {
-    var index = _ramda["default"].findIndex(_ramda["default"].propEq('value', value), newRightOptions);
+  var newRightOptions = R.clone(rightOptions);
+  R.forEach(function (value) {
+    var index = R.findIndex(R.propEq('value', value), newRightOptions);
 
     if (isDirectionUpward) {
       // eslint-disable-next-line
@@ -120,7 +111,6 @@ var moveVertically = function moveVertically(isDirectionUpward, state) {
       ++index === rightOptions.length ? null : swap(index, index - 1)(newRightOptions);
     }
   }, selectedValues);
-
   return newRightOptions;
 };
 

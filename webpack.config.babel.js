@@ -1,10 +1,11 @@
 
 import { join } from 'path'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const include = join(__dirname, 'src')
 
 export default {
+  mode: 'production',
   entry: './src/index',
   output: {
     path: join(__dirname, 'dist'),
@@ -12,9 +13,12 @@ export default {
     library: 'DoubleListBox',
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: "react-listbox.css"
-    })
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: 'react-listbox.css',
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
+    }),
   ],
   devtool: 'eval',
   module: {
@@ -39,7 +43,15 @@ export default {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader',
+        ],
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,

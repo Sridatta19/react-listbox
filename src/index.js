@@ -1,6 +1,5 @@
 
 import React, { Component, PropTypes } from 'react'
-import R from 'ramda'
 import { SelectionPanel, SelectionPanel2 } from './selectionPanels'
 import { SelectableListItem, SelectedListItem } from './listItems'
 import {
@@ -10,6 +9,8 @@ import {
   moveRightToLeft,
   moveVertically
 } from './utils'
+
+const R = require('ramda');
 
 class DoubleListBox extends Component {
 

@@ -7,15 +7,11 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _ramda = _interopRequireDefault(require("ramda"));
-
 var _selectionPanels = require("./selectionPanels");
 
 var _listItems = require("./listItems");
 
 var _utils = require("./utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
@@ -39,6 +35,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var R = require('ramda');
+
 var DoubleListBox =
 /*#__PURE__*/
 function (_Component) {
@@ -59,14 +57,14 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       leftOptions: _this.props.options.map(function (option) {
-        if (_ramda["default"].contains(option.value, _this.props.selected)) {
-          return _ramda["default"].set(_ramda["default"].lensProp('hidden'), true, option);
+        if (R.contains(option.value, _this.props.selected)) {
+          return R.set(R.lensProp('hidden'), true, option);
         }
 
         return option;
       }),
       rightOptions: _this.props.options.filter(function (option) {
-        return _ramda["default"].contains(option.value, _this.props.selected);
+        return R.contains(option.value, _this.props.selected);
       }),
       leftSearchTerm: '',
       rightSearchTerm: ''
@@ -84,16 +82,14 @@ function (_Component) {
       var onChange = _this.props.onChange;
 
       if (onChange) {
-        var selectedValues = _ramda["default"].map(_ramda["default"].prop('value'), rightOptions);
-
+        var selectedValues = R.map(R.prop('value'), rightOptions);
         onChange(selectedValues);
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelectedItem", function (obj, stateLabel) {
       var newState = {};
-
-      var value = _ramda["default"].keys(obj)[0];
+      var value = R.keys(obj)[0];
 
       if (obj[value]) {
         newState[stateLabel] = (0, _utils.removeValueInCollection)(+value, _this.state[stateLabel]);
@@ -139,7 +135,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "moveTop", function () {
-      var rightOptions = _ramda["default"].concat(_ramda["default"].filter(_ramda["default"].propEq('isSelected', true), _this.state.rightOptions), _ramda["default"].filter(_ramda["default"].propEq('isSelected', undefined), _this.state.rightOptions));
+      var rightOptions = R.concat(R.filter(R.propEq('isSelected', true), _this.state.rightOptions), R.filter(R.propEq('isSelected', undefined), _this.state.rightOptions));
 
       _this.setState({
         rightOptions: rightOptions
@@ -149,7 +145,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "moveBottom", function () {
-      var rightOptions = _ramda["default"].concat(_ramda["default"].filter(_ramda["default"].propEq('isSelected', undefined), _this.state.rightOptions), _ramda["default"].filter(_ramda["default"].propEq('isSelected', true), _this.state.rightOptions));
+      var rightOptions = R.concat(R.filter(R.propEq('isSelected', undefined), _this.state.rightOptions), R.filter(R.propEq('isSelected', true), _this.state.rightOptions));
 
       _this.setState({
         rightOptions: rightOptions
@@ -183,17 +179,17 @@ function (_Component) {
       var options = nextProps.options,
           selected = nextProps.selected;
 
-      if (_ramda["default"].isEmpty(this.state.leftOptions) && _ramda["default"].isEmpty(this.state.rightOptions)) {
+      if (R.isEmpty(this.state.leftOptions) && R.isEmpty(this.state.rightOptions)) {
         this.setState({
           leftOptions: options.map(function (option) {
-            if (_ramda["default"].contains(option.value, _this2.props.selected)) {
-              return _ramda["default"].set(_ramda["default"].lensProp('hidden'), true, option);
+            if (R.contains(option.value, _this2.props.selected)) {
+              return R.set(R.lensProp('hidden'), true, option);
             }
 
             return option;
           }),
           rightOptions: options.filter(function (option) {
-            return _ramda["default"].contains(option.value, selected);
+            return R.contains(option.value, selected);
           })
         });
       }

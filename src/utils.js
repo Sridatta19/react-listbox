@@ -1,5 +1,5 @@
 
-import R from 'ramda'
+const R = require('ramda');
 
 const updateCollection = (value, collection, newValue) => {
   let index = R.findIndex(R.propEq('value', value), collection)
