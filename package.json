@@ -1,6 +1,6 @@
 {
   "name": "react-listbox",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "description": "a double listbox react component",
   "main": "build/index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "build:main": "babel --copy-files --out-dir build src",
     "build:umd": "webpack --output-filename react-listbox.js",
     "build:umd.min": "webpack --output-filename react-listbox.min.js -p",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
@@ -79,6 +80,7 @@
     "semantic-release": "^15.13.19",
     "style-loader": "1.0.0",
     "url-loader": "2.1.0",
-    "webpack": "4.39.1"
+    "webpack": "4.39.1",
+    "travis-deploy-once": "^5.0.11"
   }
 }

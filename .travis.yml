@@ -1,21 +1,16 @@
-sudo: false
 language: node_js
 cache:
   directories:
-    - node_modules
-branches:
-  only:
-    - master
+    - ~/.npm
 notifications:
   email: false
 node_js:
-  - '10'
-before_install:
-  - npm i -g npm@^6.8.0
-before_script:
-  - npm prune
+  - '9'
+  - '8'
+  - '6'
+  - '4'
 after_success:
-  - npm run semantic-release
+  - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
