@@ -1,31 +1,31 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { alphaNumericProp } from "./utils";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { alphaNumericProp } from './utils';
 
 export const SelectableListItem = props => {
   const { isSelected } = props;
-  let listStyle = "ms-elem-selectable";
+  let listStyle = 'ms-elem-selectable';
   if (isSelected) {
-    listStyle += " selected";
+    listStyle += ' selected';
   }
   return <ListItem listStyle={listStyle} {...props} />;
 };
 
 SelectableListItem.propTypes = {
-  isSelected: PropTypes.bool
+  isSelected: PropTypes.bool,
 };
 
 export const SelectedListItem = props => {
   const { isSelected } = props;
-  let listStyle = "ms-elem-selection ms-selected";
+  let listStyle = 'ms-elem-selection ms-selected';
   if (isSelected) {
-    listStyle += " selected";
+    listStyle += ' selected';
   }
   return <ListItem listStyle={listStyle} {...props} />;
 };
 
 SelectedListItem.propTypes = {
-  isSelected: PropTypes.bool
+  isSelected: PropTypes.bool,
 };
 
 const ListItem = ({ label, value, isSelected, onSelect, listStyle }) => {
@@ -46,5 +46,5 @@ ListItem.propTypes = {
   isSelected: PropTypes.bool,
   onSelect: PropTypes.func,
   listStyle: PropTypes.string,
-  value: alphaNumericProp
+  value: alphaNumericProp,
 };

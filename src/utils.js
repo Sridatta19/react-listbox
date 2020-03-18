@@ -1,10 +1,10 @@
-const R = require("ramda");
+const R = require('ramda');
 
 const updateCollection = (value, collection, newValue) => {
-  const index = R.findIndex(R.propEq("value", value), collection);
+  const index = R.findIndex(R.propEq('value', value), collection);
   return R.over(
     R.lensIndex(index),
-    R.assoc("isSelected", newValue),
+    R.assoc('isSelected', newValue),
     collection
   );
 };
@@ -15,15 +15,15 @@ export const updateValueInCollection = (value, collection) =>
 export const removeValueInCollection = (value, collection) =>
   updateCollection(value, collection, undefined);
 
-const isSelected = R.propEq("isSelected", true);
+const isSelected = R.propEq('isSelected', true);
 
 const filterAndTransformSelected = R.compose(
-  R.map(R.omit(["isSelected"])),
+  R.map(R.omit(['isSelected'])),
   R.filter(isSelected)
 );
 
 const filterAndRetrieveSelectedValues = R.compose(
-  R.map(R.prop("value")),
+  R.map(R.prop('value')),
   R.filter(isSelected)
 );
 
@@ -35,15 +35,15 @@ export const swap = (x, y) => collection => {
 };
 
 export const retrieveValues = collection =>
-  R.map(R.prop("value"), R.filter(isSelected, collection));
+  R.map(R.prop('value'), R.filter(isSelected, collection));
 
 export const alphaNumericProp = (props, propName, componentName) => {
-  componentName = componentName || "ANONYMOUS";
+  componentName = componentName || 'ANONYMOUS';
 
   if (props[propName]) {
     const value = props[propName];
     const currentType = typeof value;
-    if (typeof value !== "number" && typeof value !== "string") {
+    if (typeof value !== 'number' && typeof value !== 'string') {
       return new Error(`Invalid prop '${propName}' of type '${currentType}'
         supplied to '${componentName}', expected 'alphaNumeric'`);
     }
@@ -53,8 +53,8 @@ export const alphaNumericProp = (props, propName, componentName) => {
 };
 
 const addHideAndDropSelected = R.compose(
-  R.set(R.lensProp("hidden"), true),
-  R.omit(["isSelected"])
+  R.set(R.lensProp('hidden'), true),
+  R.omit(['isSelected'])
 );
 
 export const moveLeftToRight = (leftOptions, rightOptions) => {
@@ -74,13 +74,13 @@ export const moveLeftToRight = (leftOptions, rightOptions) => {
 
 export const moveRightToLeft = (leftOptions, rightOptions) => {
   const newRightOptions = R.filter(
-    R.propEq("isSelected", undefined),
+    R.propEq('isSelected', undefined),
     rightOptions
   );
   const selectedRightValues = filterAndRetrieveSelectedValues(rightOptions);
   const newLeftOptions = leftOptions.map(option => {
     if (R.contains(option.value, selectedRightValues)) {
-      return R.omit(["hidden"], option);
+      return R.omit(['hidden'], option);
     }
     return option;
   });
@@ -91,7 +91,7 @@ export const moveVertically = (isDirectionUpward, rightOptions) => {
   const selectedValues = retrieveValues(rightOptions);
   const newRightOptions = R.clone(rightOptions);
   R.forEach(value => {
-    let index = R.findIndex(R.propEq("value", value), newRightOptions);
+    let index = R.findIndex(R.propEq('value', value), newRightOptions);
     if (isDirectionUpward) {
       // eslint-disable-next-line
       index == 0 ? null : swap(index, index - 1)(newRightOptions);

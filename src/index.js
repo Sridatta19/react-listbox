@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { LeftSelectionPanel, RightSelectionPanel } from "./selectionPanels";
-import { SelectableListItem, SelectedListItem } from "./listItems";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { LeftSelectionPanel, RightSelectionPanel } from './panels';
+import { SelectableListItem, SelectedListItem } from './listItems';
 import {
   updateValueInCollection,
   removeValueInCollection,
   moveLeftToRight,
   moveRightToLeft,
-  moveVertically
-} from "./utils";
+  moveVertically,
+} from './utils';
 
-const R = require("ramda");
+const R = require('ramda');
 
 const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
   const [leftOptions, setLeftOptions] = useState(
     options.map(option => {
       if (R.contains(option.value, preSelected)) {
-        return R.set(R.lensProp("hidden"), true, option);
+        return R.set(R.lensProp('hidden'), true, option);
       }
       return option;
     })
@@ -24,14 +24,14 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
   const [rightOptions, setRightOptions] = useState(
     options.filter(option => R.contains(option.value, preSelected))
   );
-  const [leftSearchTerm, setLeftSearchTerm] = useState("");
-  const [rightSearchTerm, setRightSearchTerm] = useState("");
+  const [leftSearchTerm, setLeftSearchTerm] = useState('');
+  const [rightSearchTerm, setRightSearchTerm] = useState('');
   useEffect(() => {
     if (R.isEmpty(leftOptions) && R.isEmpty(rightOptions)) {
       setLeftOptions(
         options.map(option => {
           if (R.contains(option.value, preSelected)) {
-            return R.set(R.lensProp("hidden"), true, option);
+            return R.set(R.lensProp('hidden'), true, option);
           }
           return option;
         })
@@ -69,7 +69,7 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
 
   const handleChange = modifiedOptions => {
     if (onChange) {
-      const selectedValues = R.map(R.prop("value"), modifiedOptions);
+      const selectedValues = R.map(R.prop('value'), modifiedOptions);
       onChange(selectedValues);
     }
   };
@@ -108,8 +108,8 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
 
   const moveTop = () => {
     const updatedRightOptions = R.concat(
-      R.filter(R.propEq("isSelected", true), rightOptions),
-      R.filter(R.propEq("isSelected", undefined), rightOptions)
+      R.filter(R.propEq('isSelected', true), rightOptions),
+      R.filter(R.propEq('isSelected', undefined), rightOptions)
     );
     setRightOptions(updatedRightOptions);
     handleChange(updatedRightOptions);
@@ -117,8 +117,8 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
 
   const moveBottom = () => {
     const updatedRightOptions = R.concat(
-      R.filter(R.propEq("isSelected", undefined), rightOptions),
-      R.filter(R.propEq("isSelected", true), rightOptions)
+      R.filter(R.propEq('isSelected', undefined), rightOptions),
+      R.filter(R.propEq('isSelected', true), rightOptions)
     );
     setRightOptions(updatedRightOptions);
     handleChange(updatedRightOptions);
@@ -205,7 +205,7 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
 DoubleListBox.propTypes = {
   options: PropTypes.array,
   selected: PropTypes.array,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default DoubleListBox;
