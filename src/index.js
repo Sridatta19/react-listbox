@@ -8,6 +8,7 @@ import {
   moveLeftToRight,
   moveRightToLeft,
   moveVertically,
+  transformOption,
 } from './utils';
 
 import '../public/app.css';
@@ -15,30 +16,26 @@ import '../public/ionicons.css';
 
 const R = require('ramda');
 
+const useInputValue = initialValue => {
+  const [value, setValue] = useState(initialValue);
+  return {
+    value,
+    onChange: evt => setValue(evt.target.value),
+  };
+};
+
 const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
   const [leftOptions, setLeftOptions] = useState(
-    options.map(option => {
-      if (R.contains(option.value, preSelected)) {
-        return R.set(R.lensProp('hidden'), true, option);
-      }
-      return option;
-    })
+    options.map(transformOption(preSelected))
   );
   const [rightOptions, setRightOptions] = useState(
     options.filter(option => R.contains(option.value, preSelected))
   );
-  const [leftSearchTerm, setLeftSearchTerm] = useState('');
-  const [rightSearchTerm, setRightSearchTerm] = useState('');
+  const rightSearchTerm = useInputValue('');
+  const leftSearchTerm = useInputValue('');
   useEffect(() => {
     if (R.isEmpty(leftOptions) && R.isEmpty(rightOptions)) {
-      setLeftOptions(
-        options.map(option => {
-          if (R.contains(option.value, preSelected)) {
-            return R.set(R.lensProp('hidden'), true, option);
-          }
-          return option;
-        })
-      );
+      setLeftOptions(options.map(transformOption(preSelected)));
       setRightOptions(
         options.filter(option => R.contains(option.value, preSelected))
       );
@@ -127,10 +124,6 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
     handleChange(updatedRightOptions);
   };
 
-  const leftChange = evt => setLeftSearchTerm(evt.target.value);
-
-  const rightChange = evt => setRightSearchTerm(evt.target.value);
-
   const onKeyDown = () => {};
 
   return (
@@ -139,7 +132,7 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
         <input
           type="text"
           className="search-input"
-          onChange={leftChange}
+          {...leftSearchTerm}
           autoComplete="off"
           placeholder="Search"
         />
@@ -153,8 +146,9 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
             .filter(lo => !lo.hidden === true)
             .filter(
               lo =>
-                lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !==
-                -1
+                lo.label
+                  .toLowerCase()
+                  .indexOf(leftSearchTerm.value.toLowerCase()) !== -1
             )
             .map(o => (
               <SelectableListItem
@@ -178,7 +172,7 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
         <input
           type="text"
           className="search-input"
-          onChange={rightChange}
+          {...rightSearchTerm}
           autoComplete="off"
           placeholder="Search"
         />
@@ -188,7 +182,7 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
               ro =>
                 ro.label
                   .toLowerCase()
-                  .indexOf(rightSearchTerm.toLowerCase()) !== -1
+                  .indexOf(rightSearchTerm.value.toLowerCase()) !== -1
             )
             .map(o => (
               <SelectedListItem
@@ -206,8 +200,13 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
 };
 
 DoubleListBox.propTypes = {
-  options: PropTypes.array,
-  selected: PropTypes.array,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string,
+    }).isRequired
+  ),
+  selected: PropTypes.arrayOf(PropTypes.number),
   onChange: PropTypes.func,
 };
 

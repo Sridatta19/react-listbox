@@ -9,6 +9,13 @@ const updateCollection = (value, collection, newValue) => {
   );
 };
 
+export const transformOption = preSelected => option => {
+  if (R.contains(option.value, preSelected)) {
+    return R.set(R.lensProp('hidden'), true, option);
+  }
+  return option;
+};
+
 export const updateValueInCollection = (value, collection) =>
   updateCollection(value, collection, true);
 
