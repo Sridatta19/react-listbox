@@ -1,192 +1,211 @@
-
-import React, { Component, PropTypes } from 'react'
-import { SelectionPanel, SelectionPanel2 } from './selectionPanels'
-import { SelectableListItem, SelectedListItem } from './listItems'
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { LeftSelectionPanel, RightSelectionPanel } from "./selectionPanels";
+import { SelectableListItem, SelectedListItem } from "./listItems";
 import {
   updateValueInCollection,
   removeValueInCollection,
   moveLeftToRight,
   moveRightToLeft,
   moveVertically
-} from './utils'
+} from "./utils";
 
-const R = require('ramda');
+const R = require("ramda");
 
-class DoubleListBox extends Component {
-
-  state = {
-    leftOptions: this.props.options.map(
-      (option) => {
-        if (R.contains(option.value, this.props.selected)) {
-          return R.set(R.lensProp('hidden'), true, option)
-        }
-        return option
+const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
+  const [leftOptions, setLeftOptions] = useState(
+    options.map(option => {
+      if (R.contains(option.value, preSelected)) {
+        return R.set(R.lensProp("hidden"), true, option);
       }
-    ),
-    rightOptions: this.props.options.filter(
-      option => R.contains(option.value, this.props.selected)
-    ),
-    leftSearchTerm: '',
-    rightSearchTerm: ''
-  }
-
-  static defaultProps = {
-    selected: []
-  }
-
-  static propTypes = {
-    options: PropTypes.array,
-    selected: PropTypes.array,
-    onChange: PropTypes.func
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { options, selected } = nextProps
-    if (R.isEmpty(this.state.leftOptions) && R.isEmpty(this.state.rightOptions)) {
-      this.setState({
-        leftOptions: options.map(
-          (option) => {
-            if (R.contains(option.value, this.props.selected)) {
-              return R.set(R.lensProp('hidden'), true, option)
-            }
-            return option
+      return option;
+    })
+  );
+  const [rightOptions, setRightOptions] = useState(
+    options.filter(option => R.contains(option.value, preSelected))
+  );
+  const [leftSearchTerm, setLeftSearchTerm] = useState("");
+  const [rightSearchTerm, setRightSearchTerm] = useState("");
+  useEffect(() => {
+    if (R.isEmpty(leftOptions) && R.isEmpty(rightOptions)) {
+      setLeftOptions(
+        options.map(option => {
+          if (R.contains(option.value, preSelected)) {
+            return R.set(R.lensProp("hidden"), true, option);
           }
-        ),
-        rightOptions: options.filter(
-          option => R.contains(option.value, selected)
-        )
-      })
+          return option;
+        })
+      );
+      setRightOptions(
+        options.filter(option => R.contains(option.value, preSelected))
+      );
+    } else if (options.length === 0) {
+      setLeftOptions([]);
+      setRightOptions([]);
     }
-  }
+  }, [preSelected, options, rightOptions, leftOptions]);
 
-  onLeftSelect = (obj) => {
-    this.handleSelectedItem(obj, 'leftOptions')
-  }
-
-  onRightSelect = (obj) => {
-    this.handleSelectedItem(obj, 'rightOptions')
-  }
-
-  handleChange = (rightOptions) => {
-    const { onChange } = this.props
-    if (onChange) {
-      let selectedValues = R.map(R.prop('value'), rightOptions)
-      onChange(selectedValues)
-    }
-  }
-
-  handleSelectedItem = (obj, stateLabel) => {
-    const newState = {}
-    const value = R.keys(obj)[0]
+  const onLeftSelect = obj => {
+    let newLeftOptions;
+    const value = R.keys(obj)[0];
     if (obj[value]) {
-      newState[stateLabel] = removeValueInCollection(+value, this.state[stateLabel])
+      newLeftOptions = removeValueInCollection(+value, leftOptions);
     } else {
-      newState[stateLabel] = updateValueInCollection(+value, this.state[stateLabel])
+      newLeftOptions = updateValueInCollection(+value, leftOptions);
     }
-    this.setState(newState)
-  }
+    setLeftOptions(newLeftOptions);
+  };
 
-  moveRight = () => {
-    const newState = moveLeftToRight(this.state)
-    this.setState(newState)
-    this.handleChange(newState.rightOptions)
-  }
+  const onRightSelect = obj => {
+    let newRightOptions;
+    const value = R.keys(obj)[0];
+    if (obj[value]) {
+      newRightOptions = removeValueInCollection(+value, rightOptions);
+    } else {
+      newRightOptions = updateValueInCollection(+value, rightOptions);
+    }
+    setRightOptions(newRightOptions);
+  };
 
-  moveLeft = () => {
-    const newState = moveRightToLeft(this.state)
-    this.setState(newState)
-    this.handleChange(newState.rightOptions)
-  }
+  const handleChange = modifiedOptions => {
+    if (onChange) {
+      const selectedValues = R.map(R.prop("value"), modifiedOptions);
+      onChange(selectedValues);
+    }
+  };
 
-  moveVertically = (isDirectionUpward) => {
-    const newRightOptions = moveVertically(isDirectionUpward, this.state)
-    this.setState({ rightOptions: newRightOptions })
-    this.handleChange(newRightOptions)
-  }
+  const moveRight = () => {
+    const { newLeftOptions, newRightOptions } = moveLeftToRight(
+      leftOptions,
+      rightOptions
+    );
+    setLeftOptions(newLeftOptions);
+    setRightOptions(newRightOptions);
+    handleChange(newRightOptions);
+  };
 
-  moveUp = () => {
-    this.moveVertically(true)
-  }
+  const moveLeft = () => {
+    const { newLeftOptions, newRightOptions } = moveRightToLeft(
+      leftOptions,
+      rightOptions
+    );
+    setLeftOptions(newLeftOptions);
+    setRightOptions(newRightOptions);
+    handleChange(newRightOptions);
+  };
 
-  moveDown = () => {
-    this.moveVertically(false)
-  }
+  const moveUp = () => {
+    const updatedRightOptions = moveVertically(true, rightOptions);
+    setRightOptions(updatedRightOptions);
+    handleChange(updatedRightOptions);
+  };
 
-  moveTop = () => {
-    const rightOptions = R.concat(
-      R.filter(R.propEq('isSelected', true), this.state.rightOptions),
-      R.filter(R.propEq('isSelected', undefined), this.state.rightOptions)
-    )
-    this.setState({ rightOptions });
-    this.handleChange(rightOptions);
-  }
+  const moveDown = () => {
+    const updatedRightOptions = moveVertically(false, rightOptions);
+    setRightOptions(updatedRightOptions);
+    handleChange(updatedRightOptions);
+  };
 
-  moveBottom = () => {
-    const rightOptions = R.concat(
-      R.filter(R.propEq('isSelected', undefined), this.state.rightOptions),
-      R.filter(R.propEq('isSelected', true), this.state.rightOptions)
-    )
-    this.setState({ rightOptions });
-    this.handleChange(rightOptions);
-  }
+  const moveTop = () => {
+    const updatedRightOptions = R.concat(
+      R.filter(R.propEq("isSelected", true), rightOptions),
+      R.filter(R.propEq("isSelected", undefined), rightOptions)
+    );
+    setRightOptions(updatedRightOptions);
+    handleChange(updatedRightOptions);
+  };
 
-  leftChange = (event) => {
-    this.setState({ leftSearchTerm: event.target.value })
-  }
+  const moveBottom = () => {
+    const updatedRightOptions = R.concat(
+      R.filter(R.propEq("isSelected", undefined), rightOptions),
+      R.filter(R.propEq("isSelected", true), rightOptions)
+    );
+    setRightOptions(updatedRightOptions);
+    handleChange(updatedRightOptions);
+  };
 
-  rightChange = (event) => {
-    this.setState({ rightSearchTerm: event.target.value })
-  }
+  const leftChange = evt => setLeftSearchTerm(evt.target.value);
 
-  onKeyDown = () => {
+  const rightChange = evt => setRightSearchTerm(evt.target.value);
 
-  }
+  const onKeyDown = () => {};
 
-  render() {
-    const { leftOptions, rightOptions, leftSearchTerm, rightSearchTerm } = this.state
-    return (
-      <div className="ms-container" id="ms-pre-selected-options">
-        <div className="ms-selectable">
-          <input type="text" className="search-input" onChange={this.leftChange} autoComplete="off" placeholder="Search" />
-          <ul className="ms-list" tabIndex="-1" onKeyDown={this.onKeyDown}>
-            {leftOptions
-              .filter(lo => !lo.hidden === true)
-              .filter(lo => lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !== -1)
-              .map(
-                o => <SelectableListItem
-                  key={o.value}
-                  value={o.value}
-                  label={o.label}
-                  onSelect={this.onLeftSelect}
-                  isSelected={o.isSelected}
-                />
-              )}
-          </ul>
-        </div>
-        <SelectionPanel moveRight={this.moveRight} moveLeft={this.moveLeft} />
-        <SelectionPanel2
-          moveTop={this.moveTop} moveBottom={this.moveBottom}
-          moveUp={this.moveUp} moveDown={this.moveDown}
+  return (
+    <div className="ms-container" id="ms-pre-selected-options">
+      <div className="ms-selectable">
+        <input
+          type="text"
+          className="search-input"
+          onChange={leftChange}
+          autoComplete="off"
+          placeholder="Search"
         />
-        <div className="ms-selection">
-          <input type="text" className="search-input" onChange={this.rightChange} autoComplete="off" placeholder="Search" />
-          <ul className="ms-list" tabIndex="-1">
-            {rightOptions
-              .filter(ro => ro.label.toLowerCase().indexOf(rightSearchTerm.toLowerCase()) !== -1)
-              .map(
-                o => <SelectedListItem
-                  key={o.value}
-                  value={o.value}
-                  label={o.label}
-                  onSelect={this.onRightSelect}
-                  isSelected={o.isSelected}
-                />
-            )}
-          </ul>
-        </div>
+        <ul
+          className="ms-list"
+          tabIndex="-1"
+          onKeyDown={onKeyDown}
+          role="presentation"
+        >
+          {leftOptions
+            .filter(lo => !lo.hidden === true)
+            .filter(
+              lo =>
+                lo.label.toLowerCase().indexOf(leftSearchTerm.toLowerCase()) !==
+                -1
+            )
+            .map(o => (
+              <SelectableListItem
+                key={o.value}
+                value={o.value}
+                label={o.label}
+                onSelect={onLeftSelect}
+                isSelected={o.isSelected}
+              />
+            ))}
+        </ul>
       </div>
-    )
-  }
-}
+      <LeftSelectionPanel moveRight={moveRight} moveLeft={moveLeft} />
+      <RightSelectionPanel
+        moveTop={moveTop}
+        moveBottom={moveBottom}
+        moveUp={moveUp}
+        moveDown={moveDown}
+      />
+      <div className="ms-selection">
+        <input
+          type="text"
+          className="search-input"
+          onChange={rightChange}
+          autoComplete="off"
+          placeholder="Search"
+        />
+        <ul className="ms-list" tabIndex="-1">
+          {rightOptions
+            .filter(
+              ro =>
+                ro.label
+                  .toLowerCase()
+                  .indexOf(rightSearchTerm.toLowerCase()) !== -1
+            )
+            .map(o => (
+              <SelectedListItem
+                key={o.value}
+                value={o.value}
+                label={o.label}
+                onSelect={onRightSelect}
+                isSelected={o.isSelected}
+              />
+            ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
-export default DoubleListBox
+DoubleListBox.propTypes = {
+  options: PropTypes.array,
+  selected: PropTypes.array,
+  onChange: PropTypes.func
+};
+
+export default DoubleListBox;

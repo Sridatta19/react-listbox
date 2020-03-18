@@ -1,8 +1,7 @@
-
-import { join } from 'path'
+import { join } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const include = join(__dirname, 'src')
+// const include = join(__dirname, 'src');
 
 export default {
   mode: 'production',
@@ -24,43 +23,41 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true,
-          babelrc: false,
-          presets: ['@babel/preset-react', '@babel/preset-env'],
-          plugins: [
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-transform-react-constant-elements',
-            'add-module-exports'
-          ]
-        },
-        include
-      },
-      {
-        test: /\.json$/, loader: 'json', include
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-react-constant-elements',
+              'add-module-exports',
+              'transform-react-remove-prop-types',
+            ],
           },
-          'css-loader',
-        ],
+        },
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'file-loader',
-        query: {
-          name: 'fonts/[name].[ext]'
-        }
-      }
-    ]
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext][query]',
+            },
+          },
+        ],
+      },
+    ],
   },
   externals: [
     {
@@ -68,16 +65,16 @@ export default {
         root: 'ReactDOM',
         commonjs2: 'react-dom',
         commonjs: 'react-dom',
-        amd: 'react-dom'
-      }
+        amd: 'react-dom',
+      },
     },
     {
       react: {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
-        amd: 'react'
-      }
-    }
-  ]
-}
+        amd: 'react',
+      },
+    },
+  ],
+};
