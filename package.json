@@ -2,7 +2,7 @@
   "name": "react-listbox",
   "version": "0.0.0-development",
   "description": "a double listbox react component",
-  "main": "build/index.js",
+  "main": "dist/react-listbox.min.js",
   "scripts": {
     "commit": "npx git-cz",
     "test": "mocha --require @babel/register --recursive tests/**/*.spec.js --require tests/setup.js",

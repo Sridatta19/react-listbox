@@ -10,6 +10,9 @@ import {
   moveVertically,
 } from './utils';
 
+import '../public/app.css';
+import '../public/ionicons.css';
+
 const R = require('ramda');
 
 const DoubleListBox = ({ options, selected: preSelected, onChange }) => {

@@ -1,4 +1,5 @@
 # react-listbox
+
 a double listbox react component
 
 [![travis build](https://img.shields.io/travis/Sridatta19/react-listbox.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/Sridatta19/react-listbox)
@@ -24,30 +25,35 @@ Demo & Examples can be found [here](https://sridatta19.github.io/react-listbox/)
 ### Usage
 
 ```javascript
-import ListBox from 'react-listbox'
-import 'react-listbox/dist/react-listbox.css'
+import ListBox from 'react-listbox';
+import 'react-listbox/dist/react-listbox.css';
 
 const options = [
-  {label:'One', value: 1},
-  {label:'Two', value: 2},
-  {label:'Three', value: 3}
-]
+  { label: 'One', value: 1 },
+  { label: 'Two', value: 2 },
+  { label: 'Three', value: 3 },
+];
 // You can also pass the array of preselected options;
-const selected = [1, 2]
-onChange = (selectedValues) => {
+const selected = [1, 2];
+onChange = selectedValues => {
   // handle selected values here
-}
-<ListBox options={options} onChange={onChange} selected={selected}/>
+};
+<ListBox options={options} onChange={onChange} selected={selected} />;
 ```
 
 You can also use the browser build available in the dist folder.
 
 ```html
-<script type="text/javascript" src="https://unpkg.com/react-listbox@1.2.5/dist/react-listbox.min.js"></script>
+<script
+  type="text/javascript"
+  src="https://unpkg.com/react-listbox@1.3.0/dist/react-listbox.min.js"
+></script>
 
-<link rel="stylesheet" href="https://unpkg.com/react-listbox@1.2.5/dist/react-listbox.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/react-listbox@1.3.0/dist/react-listbox.css"
+/>
 ```
-
 
 ### Other
 
