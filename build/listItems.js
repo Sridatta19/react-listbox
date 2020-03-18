@@ -17,10 +17,10 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 var SelectableListItem = function SelectableListItem(props) {
   var isSelected = props.isSelected;
-  var listStyle = "ms-elem-selectable";
+  var listStyle = 'ms-elem-selectable';
 
   if (isSelected) {
-    listStyle += " selected";
+    listStyle += ' selected';
   }
 
   return _react["default"].createElement(ListItem, _extends({
@@ -32,10 +32,10 @@ exports.SelectableListItem = SelectableListItem;
 
 var SelectedListItem = function SelectedListItem(props) {
   var isSelected = props.isSelected;
-  var listStyle = "ms-elem-selection ms-selected";
+  var listStyle = 'ms-elem-selection ms-selected';
 
   if (isSelected) {
-    listStyle += " selected";
+    listStyle += ' selected';
   }
 
   return _react["default"].createElement(ListItem, _extends({

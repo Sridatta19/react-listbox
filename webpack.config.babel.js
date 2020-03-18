@@ -4,7 +4,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 // const include = join(__dirname, 'src');
 
 export default {
-  mode: 'production',
   entry: './src/index',
   output: {
     path: join(__dirname, 'dist'),

@@ -28,13 +28,13 @@ var LeftSelectionPanel = function LeftSelectionPanel(_ref) {
     type: "button",
     onClick: moveRight,
     style: {
-      margin: "120px 6px"
+      margin: '120px 6px'
     }
   }, _ref2), _react["default"].createElement("button", {
     type: "button",
     onClick: moveLeft,
     style: {
-      marginLeft: "6px"
+      marginLeft: '6px'
     }
   }, _ref3));
 };
@@ -68,33 +68,33 @@ var RightSelectionPanel = function RightSelectionPanel(_ref4) {
     type: "button",
     onClick: moveTop,
     style: {
-      margin: "65px 6px"
+      margin: '65px 6px'
     }
   }, _ref5), _react["default"].createElement("span", {
     style: {
-      marginLeft: "6px"
+      marginLeft: '6px'
     }
   }, "Up"), _react["default"].createElement("button", {
     type: "button",
     style: {
-      margin: "6px"
+      margin: '6px'
     },
     onClick: moveUp
   }, _ref6), _react["default"].createElement("button", {
     type: "button",
     style: {
-      margin: "6px"
+      margin: '6px'
     },
     onClick: moveDown
   }, _ref7), _react["default"].createElement("span", {
     style: {
-      marginLeft: "6px"
+      marginLeft: '6px'
     }
   }, "Down"), _react["default"].createElement("button", {
     type: "button",
     onClick: moveBottom,
     style: {
-      margin: "55px 6px"
+      margin: '55px 6px'
     }
   }, _ref8));
 };

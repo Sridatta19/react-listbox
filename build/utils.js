@@ -7,11 +7,11 @@ exports.moveVertically = exports.moveRightToLeft = exports.moveLeftToRight = exp
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var R = require("ramda");
+var R = require('ramda');
 
 var updateCollection = function updateCollection(value, collection, newValue) {
-  var index = R.findIndex(R.propEq("value", value), collection);
-  return R.over(R.lensIndex(index), R.assoc("isSelected", newValue), collection);
+  var index = R.findIndex(R.propEq('value', value), collection);
+  return R.over(R.lensIndex(index), R.assoc('isSelected', newValue), collection);
 };
 
 var updateValueInCollection = function updateValueInCollection(value, collection) {
@@ -25,9 +25,9 @@ var removeValueInCollection = function removeValueInCollection(value, collection
 };
 
 exports.removeValueInCollection = removeValueInCollection;
-var isSelected = R.propEq("isSelected", true);
-var filterAndTransformSelected = R.compose(R.map(R.omit(["isSelected"])), R.filter(isSelected));
-var filterAndRetrieveSelectedValues = R.compose(R.map(R.prop("value")), R.filter(isSelected));
+var isSelected = R.propEq('isSelected', true);
+var filterAndTransformSelected = R.compose(R.map(R.omit(['isSelected'])), R.filter(isSelected));
+var filterAndRetrieveSelectedValues = R.compose(R.map(R.prop('value')), R.filter(isSelected));
 
 var swap = function swap(x, y) {
   return function (collection) {
@@ -41,20 +41,20 @@ var swap = function swap(x, y) {
 exports.swap = swap;
 
 var retrieveValues = function retrieveValues(collection) {
-  return R.map(R.prop("value"), R.filter(isSelected, collection));
+  return R.map(R.prop('value'), R.filter(isSelected, collection));
 };
 
 exports.retrieveValues = retrieveValues;
 
 var alphaNumericProp = function alphaNumericProp(props, propName, componentName) {
-  componentName = componentName || "ANONYMOUS";
+  componentName = componentName || 'ANONYMOUS';
 
   if (props[propName]) {
     var value = props[propName];
 
     var currentType = _typeof(value);
 
-    if (typeof value !== "number" && typeof value !== "string") {
+    if (typeof value !== 'number' && typeof value !== 'string') {
       return new Error("Invalid prop '".concat(propName, "' of type '").concat(currentType, "'\n        supplied to '").concat(componentName, "', expected 'alphaNumeric'"));
     }
   }
@@ -63,7 +63,7 @@ var alphaNumericProp = function alphaNumericProp(props, propName, componentName)
 };
 
 exports.alphaNumericProp = alphaNumericProp;
-var addHideAndDropSelected = R.compose(R.set(R.lensProp("hidden"), true), R.omit(["isSelected"]));
+var addHideAndDropSelected = R.compose(R.set(R.lensProp('hidden'), true), R.omit(['isSelected']));
 
 var moveLeftToRight = function moveLeftToRight(leftOptions, rightOptions) {
   var newState = {};
@@ -81,11 +81,11 @@ var moveLeftToRight = function moveLeftToRight(leftOptions, rightOptions) {
 exports.moveLeftToRight = moveLeftToRight;
 
 var moveRightToLeft = function moveRightToLeft(leftOptions, rightOptions) {
-  var newRightOptions = R.filter(R.propEq("isSelected", undefined), rightOptions);
+  var newRightOptions = R.filter(R.propEq('isSelected', undefined), rightOptions);
   var selectedRightValues = filterAndRetrieveSelectedValues(rightOptions);
   var newLeftOptions = leftOptions.map(function (option) {
     if (R.contains(option.value, selectedRightValues)) {
-      return R.omit(["hidden"], option);
+      return R.omit(['hidden'], option);
     }
 
     return option;
@@ -102,7 +102,7 @@ var moveVertically = function moveVertically(isDirectionUpward, rightOptions) {
   var selectedValues = retrieveValues(rightOptions);
   var newRightOptions = R.clone(rightOptions);
   R.forEach(function (value) {
-    var index = R.findIndex(R.propEq("value", value), newRightOptions);
+    var index = R.findIndex(R.propEq('value', value), newRightOptions);
 
     if (isDirectionUpward) {
       // eslint-disable-next-line

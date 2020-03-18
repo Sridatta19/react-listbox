@@ -11,11 +11,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _selectionPanels = require("./selectionPanels");
+var _panels = require("./panels");
 
 var _listItems = require("./listItems");
 
 var _utils = require("./utils");
+
+require("../public/app.css");
+
+require("../public/ionicons.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -31,7 +35,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var R = require("ramda");
+var R = require('ramda');
 
 var DoubleListBox = function DoubleListBox(_ref) {
   var options = _ref.options,
@@ -40,7 +44,7 @@ var DoubleListBox = function DoubleListBox(_ref) {
 
   var _useState = (0, _react.useState)(options.map(function (option) {
     if (R.contains(option.value, preSelected)) {
-      return R.set(R.lensProp("hidden"), true, option);
+      return R.set(R.lensProp('hidden'), true, option);
     }
 
     return option;
@@ -56,12 +60,12 @@ var DoubleListBox = function DoubleListBox(_ref) {
       rightOptions = _useState4[0],
       setRightOptions = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(""),
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
       leftSearchTerm = _useState6[0],
       setLeftSearchTerm = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(""),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       rightSearchTerm = _useState8[0],
       setRightSearchTerm = _useState8[1];
@@ -70,7 +74,7 @@ var DoubleListBox = function DoubleListBox(_ref) {
     if (R.isEmpty(leftOptions) && R.isEmpty(rightOptions)) {
       setLeftOptions(options.map(function (option) {
         if (R.contains(option.value, preSelected)) {
-          return R.set(R.lensProp("hidden"), true, option);
+          return R.set(R.lensProp('hidden'), true, option);
         }
 
         return option;
@@ -112,7 +116,7 @@ var DoubleListBox = function DoubleListBox(_ref) {
 
   var handleChange = function handleChange(modifiedOptions) {
     if (onChange) {
-      var selectedValues = R.map(R.prop("value"), modifiedOptions);
+      var selectedValues = R.map(R.prop('value'), modifiedOptions);
       onChange(selectedValues);
     }
   };
@@ -150,13 +154,13 @@ var DoubleListBox = function DoubleListBox(_ref) {
   };
 
   var moveTop = function moveTop() {
-    var updatedRightOptions = R.concat(R.filter(R.propEq("isSelected", true), rightOptions), R.filter(R.propEq("isSelected", undefined), rightOptions));
+    var updatedRightOptions = R.concat(R.filter(R.propEq('isSelected', true), rightOptions), R.filter(R.propEq('isSelected', undefined), rightOptions));
     setRightOptions(updatedRightOptions);
     handleChange(updatedRightOptions);
   };
 
   var moveBottom = function moveBottom() {
-    var updatedRightOptions = R.concat(R.filter(R.propEq("isSelected", undefined), rightOptions), R.filter(R.propEq("isSelected", true), rightOptions));
+    var updatedRightOptions = R.concat(R.filter(R.propEq('isSelected', undefined), rightOptions), R.filter(R.propEq('isSelected', true), rightOptions));
     setRightOptions(updatedRightOptions);
     handleChange(updatedRightOptions);
   };
@@ -199,10 +203,10 @@ var DoubleListBox = function DoubleListBox(_ref) {
       onSelect: onLeftSelect,
       isSelected: o.isSelected
     });
-  }))), _react["default"].createElement(_selectionPanels.LeftSelectionPanel, {
+  }))), _react["default"].createElement(_panels.LeftSelectionPanel, {
     moveRight: moveRight,
     moveLeft: moveLeft
-  }), _react["default"].createElement(_selectionPanels.RightSelectionPanel, {
+  }), _react["default"].createElement(_panels.RightSelectionPanel, {
     moveTop: moveTop,
     moveBottom: moveBottom,
     moveUp: moveUp,
