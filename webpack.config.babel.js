@@ -9,6 +9,7 @@ export default {
     path: join(__dirname, 'dist'),
     libraryTarget: 'umd',
     library: 'DoubleListBox',
+    umdNamedDefine: true,
   },
   plugins: [
     new MiniCssExtractPlugin({
