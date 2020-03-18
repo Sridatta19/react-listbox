@@ -93,9 +93,9 @@ var DoubleListBox = function DoubleListBox(_ref) {
     var value = R.keys(obj)[0];
 
     if (obj[value]) {
-      newLeftOptions = (0, _utils.removeValueInCollection)(+value, leftOptions);
+      newLeftOptions = (0, _utils.removeValueInCollection)(value, leftOptions);
     } else {
-      newLeftOptions = (0, _utils.updateValueInCollection)(+value, leftOptions);
+      newLeftOptions = (0, _utils.updateValueInCollection)(value, leftOptions);
     }
 
     setLeftOptions(newLeftOptions);
@@ -106,9 +106,9 @@ var DoubleListBox = function DoubleListBox(_ref) {
     var value = R.keys(obj)[0];
 
     if (obj[value]) {
-      newRightOptions = (0, _utils.removeValueInCollection)(+value, rightOptions);
+      newRightOptions = (0, _utils.removeValueInCollection)(value, rightOptions);
     } else {
-      newRightOptions = (0, _utils.updateValueInCollection)(+value, rightOptions);
+      newRightOptions = (0, _utils.updateValueInCollection)(value, rightOptions);
     }
 
     setRightOptions(newRightOptions);

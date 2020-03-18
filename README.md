@@ -46,12 +46,12 @@ You can also use the browser build available in the dist folder.
 ```html
 <script
   type="text/javascript"
-  src="https://unpkg.com/react-listbox@1.2.10/dist/react-listbox.min.js"
+  src="https://unpkg.com/react-listbox@1.2.11/dist/react-listbox.min.js"
 ></script>
 
 <link
   rel="stylesheet"
-  href="https://unpkg.com/react-listbox@1.2.10/dist/react-listbox.css"
+  href="https://unpkg.com/react-listbox@1.2.11/dist/react-listbox.css"
 />
 ```
 

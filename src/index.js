@@ -52,9 +52,9 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
     let newLeftOptions;
     const value = R.keys(obj)[0];
     if (obj[value]) {
-      newLeftOptions = removeValueInCollection(+value, leftOptions);
+      newLeftOptions = removeValueInCollection(value, leftOptions);
     } else {
-      newLeftOptions = updateValueInCollection(+value, leftOptions);
+      newLeftOptions = updateValueInCollection(value, leftOptions);
     }
     setLeftOptions(newLeftOptions);
   };
@@ -63,9 +63,9 @@ const DoubleListBox = ({ options, selected: preSelected, onChange }) => {
     let newRightOptions;
     const value = R.keys(obj)[0];
     if (obj[value]) {
-      newRightOptions = removeValueInCollection(+value, rightOptions);
+      newRightOptions = removeValueInCollection(value, rightOptions);
     } else {
-      newRightOptions = updateValueInCollection(+value, rightOptions);
+      newRightOptions = updateValueInCollection(value, rightOptions);
     }
     setRightOptions(newRightOptions);
   };
