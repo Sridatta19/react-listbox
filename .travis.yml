@@ -1,4 +1,3 @@
-before_deploy: git tag 1.3.0
 language: node_js
 cache:
   yarn: true
